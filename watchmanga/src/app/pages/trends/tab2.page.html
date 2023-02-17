@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div>
-    <ion-card *ngFor="let manga of mangaList">
+    <ion-card *ngFor="let manga of mangaList" (click)="getMangaInfo(manga.mangaUrl)">
       <img alt="Silhouette of mountains" src={{getImageUrl(manga.imageUrl)}} />
       <ion-card-header>
         <ion-card-title>{{manga.title}}</ion-card-title>
@@ -8,4 +8,6 @@
       </ion-card-header>
     </ion-card>
   </div>
+  <ngx-loading [show]="isLoading" [config]="{
+    backdropBorderRadius: '5px', fullScreenBackdrop:true}"></ngx-loading>
 </ion-content>

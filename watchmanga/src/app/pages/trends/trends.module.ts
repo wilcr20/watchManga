@@ -5,13 +5,16 @@ import { FormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 
 import { Tab2PageRoutingModule } from './trends-routing.module';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    NgxLoadingModule.forRoot({})
+
   ],
   declarations: [Tab2Page]
 })

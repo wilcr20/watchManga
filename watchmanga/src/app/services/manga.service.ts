@@ -17,5 +17,10 @@ export class MangaService {
     return this.httpClient.get(environment.apiUrl + 'trends');
   }
 
+  getMangaInfo(data: any) {
+    return this.httpClient.post(environment.apiUrl + 'mangaInfo', data);
+  }
+
+
   
 }

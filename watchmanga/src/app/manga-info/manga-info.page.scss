@@ -1,0 +1,71 @@
+ion-content {
+    --background: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: black;
+    // background-image: url("../../../assets/images/bg.png");
+    // background-size: cover;
+}
+
+ion-buttons {
+    color: #00a19a !important;
+    font-size: 1.5rem;
+    padding-left: 0.5em;
+}
+
+.body {
+    text-align: center;
+    margin-top: 1em;
+
+    button {
+        background: transparent;
+        position: absolute;
+        left: 10px;
+        color: red;
+        font-size: 40px;
+    }
+
+    img {
+        width: 60%;
+    }
+
+    h3 {
+        color: white;
+        font-style: italic;
+        margin-top: 0.5em;
+        margin-bottom: 0.8em;
+    }
+
+    p {
+        color: #06e613;
+        margin-bottom: 0.8em;
+        text-align: initial;
+        margin-left: 2em;
+        margin-right: 2em;
+        margin-top: -8px;
+    }
+
+    span {
+        color: white;
+        font-size: small;
+    }
+
+    article {
+        color: #9ca7a3;
+        margin: 1em;
+        text-align: center;
+    }
+
+    .chapterList {
+        margin: 1em;
+
+        hr {
+            border-top: 1px solid #9ca7a3;
+        }
+
+        p {
+            margin: 0;
+        }
+    }
+
+}

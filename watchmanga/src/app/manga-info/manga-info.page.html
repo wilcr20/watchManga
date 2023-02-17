@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-icon (click)="closeModal()" name="arrow-back-outline"></ion-icon>
+        <!-- <ion-title>Plan Premium</ion-title> -->
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="body">
+    <button *ngIf="!isFavorite" (click)="addToFavorite()"><ion-icon name="heart-outline"></ion-icon></button>
+    <button *ngIf="isFavorite" (click)="removeToFavorite()"><ion-icon name="heart-dislike-outline"></ion-icon></button>
+
+    <img src={{getMangaImgUrl()}} alt="" srcset="">
+    <h3>{{data.data.title}}</h3>
+    <p>Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
+    <p>Estado: <span>{{data.data.state}} </span> </p>
+    <article>{{data.data.description}}</article>
+    <br>
+    <div class="chapterList">
+      <div *ngFor="let ch of data.data.chapterList">
+        <hr>
+        <p>{{ch.chapter}}</p>
+      </div>
+    </div>
+    <br><br>
+  </div>
+
+  <ngx-loading [show]="isLoading" [config]="{
+    backdropBorderRadius: '5px', fullScreenBackdrop:true}"></ngx-loading>
+</ion-content>
