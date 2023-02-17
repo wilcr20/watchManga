@@ -4,33 +4,42 @@ import { MangaService } from 'src/app/services/manga.service';
 import { MangaInfoPage } from '../manga-info/manga-info.page';
 
 @Component({
-  selector: 'app-favorites',
-  templateUrl: './favorites.page.html',
-  styleUrls: ['./favorites.page.scss'],
+  selector: 'app-tab3',
+  templateUrl: 'tab3.page.html',
+  styleUrls: ['tab3.page.scss']
 })
-export class FavoritesPage {
+export class Tab3Page {
+
+  isLoading = false;
+  seachValue = ""
+  searchResult:any = [];
+  isSearchDone = false;
 
   constructor(
     private mangaService: MangaService,
     public modalController: ModalController
   ) { }
-  isLoading = false;
-  favoriteList: any = [];
+
   ionViewWillEnter() {
-    this.getFavoriteList()
+    this.seachValue = "";
   }
 
-  getFavoriteList() {
-    let favoriteList = localStorage.getItem("favorites");
-    if (favoriteList) {
-      this.favoriteList = JSON.parse(favoriteList).reverse();
+  setValue() {
+    if (this.seachValue.trim() == "") {
+      this.isSearchDone = false;
+      this.searchResult = [];
+    } else if (this.seachValue.trim() != "" && this.seachValue.length > 2) {
+      this.mangaService.searchMangaTerm(this.seachValue).subscribe((data: any) => {
+        this.isSearchDone = true;
+        this.searchResult = data;
+        console.log("- ", this.searchResult);
+      })
     }
   }
 
   getImageUrl(url:string){
     return "https://www.leercapitulo.com" + url;
   }
-
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
@@ -53,7 +62,6 @@ export class FavoritesPage {
       }
     });
     modal.onDidDismiss().then(() => {
-      this.getFavoriteList();
     });
     return await modal.present();
   }

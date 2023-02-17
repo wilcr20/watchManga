@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Tab3Page } from './tab3.page';
 import { NgxLoadingModule } from 'ngx-loading';
 
-import { Tab3PageRoutingModule } from './tab3-routing.module';
+import { Tab3PageRoutingModule } from './search-routing.module';
 
 @NgModule({
   imports: [

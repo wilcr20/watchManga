@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true">
+
+  <div class="body">
+    <ion-searchbar (ionChange)="setValue()" [(ngModel)]="seachValue" show-clear-button="always"
+      placeholder="Ingrese el texto a buscar ..."></ion-searchbar>
+
+    <div *ngIf="!isSearchDone && searchResult.length == 0" style="text-align: center;">
+      <img src="https://media.tenor.com/3S9l9HzhGVcAAAAM/shake-kaninayuta.gif" alt="" srcset="">
+    </div>
+    <div class="noSearchResult" *ngIf="isSearchDone && searchResult.length == 0">
+      <p>No se encontraron resultados para la búsqueda</p>
+    </div>
+
+    <div class="searchResult" *ngIf="isSearchDone && searchResult.length > 0">
+      <ion-list>
+        <ion-item *ngFor="let result of searchResult" (click)="getMangaInfo(result.link)">
+          <ion-thumbnail slot="start" class="ios hydrated">
+            <img width="" src={{getImageUrl(result.thumbnail)}}>
+          </ion-thumbnail>
+          <ion-label class="ion-text-wrap">
+            <h2>{{result.label}} </h2>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+
+  <ngx-loading [show]="isLoading" [config]="{
+    backdropBorderRadius: '5px', fullScreenBackdrop:true}"></ngx-loading>
+
+</ion-content>

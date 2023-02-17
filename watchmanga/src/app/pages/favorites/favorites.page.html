@@ -6,7 +6,7 @@
 
   <div class="favoriteList" *ngIf="favoriteList.length > 0">
     <ion-list>
-      <ion-item *ngFor="let favorite of favoriteList" (click)="getMangaInfo(favorite.url)" >
+      <ion-item *ngFor="let favorite of favoriteList" (click)="getMangaInfo(favorite.url)">
         <ion-thumbnail slot="start" class="ios hydrated">
           <img width="" src={{getImageUrl(favorite.imgUrl)}}>
         </ion-thumbnail>

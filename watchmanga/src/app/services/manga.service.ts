@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -21,6 +21,9 @@ export class MangaService {
     return this.httpClient.post(environment.apiUrl + 'mangaInfo', data);
   }
 
-
+  searchMangaTerm(search: string) {
+    let params = new HttpParams().set('term', search);
+    return this.httpClient.get(environment.apiUrl + 'search', { params: params });
+  }
   
 }

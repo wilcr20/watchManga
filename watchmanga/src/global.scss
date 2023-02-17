@@ -26,5 +26,9 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 ion-toolbar {
-    --background: black;
-  }
+  --background: black;
+}
+
+ion-title {
+  width: 15em;
+}
