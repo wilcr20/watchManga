@@ -21,7 +21,7 @@
     <article>{{data.data.description}}</article>
     <br>
     <div class="chapterList">
-      <div *ngFor="let ch of data.data.chapterList">
+      <div *ngFor="let ch of data.data.chapterList" (click)="readChapter(ch.chapterUrl)" >
         <hr>
         <p>{{ch.chapter}}</p>
       </div>

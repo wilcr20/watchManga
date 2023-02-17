@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InAppBrowserOptions, InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
 
 @Component({
@@ -10,10 +11,21 @@ export class MangaInfoPage implements OnInit {
   data: any;
   isFavorite = false;
   isLoading = false;
+  options: InAppBrowserOptions = {
+    location: 'yes',//Or 'no' 
+    hidden: 'no', //Or  'yes'
+    clearcache: 'no',
+    clearsessioncache: 'no',
+    zoom: 'yes',//Android only ,shows browser zoom controls 
+    hardwareback: 'yes',
+    mediaPlaybackRequiresUserAction: 'no',
+    shouldPauseOnSuspend: 'no', //Android only   
+  };
 
   constructor(
     private modalController: ModalController,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private theInAppBrowser: InAppBrowser
   ) { }
 
   ngOnInit() {
@@ -75,5 +87,11 @@ export class MangaInfoPage implements OnInit {
       localStorage.setItem("favorites", JSON.stringify(list));
     }
     this.isLoading = false;
+  }
+
+  readChapter(url: string) {
+    let chapterUrl = "https://www.leercapitulo.com" + url;
+    let target = "_blank";
+    this.theInAppBrowser.create(chapterUrl, target, this.options);
   }
 }
