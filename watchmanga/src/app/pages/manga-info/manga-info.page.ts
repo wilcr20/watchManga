@@ -54,14 +54,26 @@ export class MangaInfoPage implements OnInit {
     let favoriteList: any = localStorage.getItem("favorites");
     if (favoriteList) {
       let list = JSON.parse(favoriteList);
-      list.push({ url: navData.url, title: this.data.data.title });
-      this.isFavorite = true;
-      localStorage.setItem("favorites", JSON.stringify(list));
+      let isMangaFavorite = list.filter((l: { url: any; }) => l.url == navData.url);
+      if (isMangaFavorite.length == 0) {
+        list.push({ url: navData.url, title: this.data.data.title, imgUrl: this.data.data.imageUrl });
+        this.isFavorite = true;
+        localStorage.setItem("favorites", JSON.stringify(list));
+      }
     }
     this.isLoading = false;
   }
 
   removeToFavorite() {
-
+    this.isLoading = true;
+    let navData: any = this.navParams.data;
+    let favoriteList: any = localStorage.getItem("favorites");
+    if (favoriteList) {
+      let list = JSON.parse(favoriteList);
+      list = list.filter((l: { url: any; }) => l.url != navData.url);
+      this.isFavorite = false;
+      localStorage.setItem("favorites", JSON.stringify(list));
+    }
+    this.isLoading = false;
   }
 }

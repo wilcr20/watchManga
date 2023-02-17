@@ -1,38 +1,36 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { HomeManga } from 'src/app/interfaces/homeManga.interface';
-import { MangaInfoPage } from 'src/app/pages/manga-info/manga-info.page';
 import { MangaService } from 'src/app/services/manga.service';
+import { MangaInfoPage } from '../manga-info/manga-info.page';
 
 @Component({
-  selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  selector: 'app-favorites',
+  templateUrl: './favorites.page.html',
+  styleUrls: ['./favorites.page.scss'],
 })
-export class Tab1Page {
-  mangaList: Array<HomeManga> = [];
-  isLoading = false;
+export class FavoritesPage {
+
   constructor(
     private mangaService: MangaService,
     public modalController: ModalController
-  ) {
-    this.getMangaHome()
+  ) { }
+  isLoading = false;
+  favoriteList: any = [];
+  ionViewWillEnter() {
+    this.getFavoriteList()
   }
 
-  getMangaHome() {
-    this.isLoading = true;
-    this.mangaService.getHomeManga().subscribe((data: any) => {
-      this.isLoading = false;
-      this.mangaList = data.data;
-    }, (err) => {
-      this.isLoading = false;
-      console.log(err);
-    })
+  getFavoriteList() {
+    let favoriteList = localStorage.getItem("favorites");
+    if (favoriteList) {
+      this.favoriteList = JSON.parse(favoriteList);
+    }
   }
 
-  getImageUrl(img: string) {
-    return "https://www.leercapitulo.com" + img;
+  getImageUrl(url:string){
+    return "https://www.leercapitulo.com" + url;
   }
+
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
@@ -48,20 +46,15 @@ export class Tab1Page {
 
   async openModal(mangaInfo: any, mangaUrl: string) {
     const modal = await this.modalController.create({
-      
       component: MangaInfoPage,
       componentProps: {
         data: mangaInfo,
         url: mangaUrl
       }
     });
-    modal.onDidDismiss().then((dataReturned) => {
-      if (dataReturned !== null) {
-        // this.dataReturned = dataReturned.data;
-        //alert('Modal Sent Data :'+ dataReturned);
-      }
+    modal.onDidDismiss().then(() => {
+      this.getFavoriteList();
     });
-
     return await modal.present();
   }
 

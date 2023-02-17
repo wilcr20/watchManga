@@ -8,7 +8,7 @@ const routes: Routes = [
   },
   {
     path: 'manga-info',
-    loadChildren: () => import('./manga-info/manga-info.module').then( m => m.MangaInfoPageModule)
+    loadChildren: () => import('./pages/manga-info/manga-info.module').then( m => m.MangaInfoPageModule)
   }
 ];
 @NgModule({

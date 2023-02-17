@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { HomeManga } from 'src/app/interfaces/homeManga.interface';
-import { MangaInfoPage } from 'src/app/manga-info/manga-info.page';
+import { MangaInfoPage } from 'src/app/pages/manga-info/manga-info.page';
 import { MangaService } from 'src/app/services/manga.service';
 
 @Component({
@@ -47,9 +47,7 @@ export class Tab2Page {
   }
 
   async openModal(mangaInfo: any, mangaUrl: string) {
-    console.log(mangaInfo);
     const modal = await this.modalController.create({
-      
       component: MangaInfoPage,
       componentProps: {
         data: mangaInfo,

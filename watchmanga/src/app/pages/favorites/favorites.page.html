@@ -1,0 +1,22 @@
+<ion-content>
+  <div class="noFavorites" *ngIf="favoriteList.length == 0">
+    <p>No hay favoritos agregados.</p>
+  </div>
+
+
+  <div class="favoriteList" *ngIf="favoriteList.length > 0">
+    <ion-list>
+      <ion-item *ngFor="let favorite of favoriteList" (click)="getMangaInfo(favorite.url)" >
+        <ion-thumbnail slot="start" class="ios hydrated">
+          <img width="" src={{getImageUrl(favorite.imgUrl)}}>
+        </ion-thumbnail>
+        <ion-label class="ion-text-wrap">
+          <h2>{{favorite.title}} </h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ngx-loading [show]="isLoading" [config]="{
+    backdropBorderRadius: '5px', fullScreenBackdrop:true}"></ngx-loading>
+</ion-content>

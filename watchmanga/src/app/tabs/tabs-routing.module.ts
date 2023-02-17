@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {
+        path: 'tab4',
+        loadChildren: () => import('../pages/favorites/favorites.module').then(m => m.FavoritesPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
