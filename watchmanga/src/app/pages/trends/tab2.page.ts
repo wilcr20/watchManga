@@ -11,6 +11,7 @@ import { MangaService } from 'src/app/services/manga.service';
 })
 export class Tab2Page {
   isLoading = false;
+  isLoadingTrendsRequest = false;
   mangaList: Array<HomeManga> = [];
   constructor(
     private mangaService: MangaService,
@@ -21,11 +22,14 @@ export class Tab2Page {
 
   getMangaTrends() {
     this.isLoading = true;
+    this.isLoadingTrendsRequest = true;
     this.mangaService.getTrendsManga().subscribe((data: any) => {
       this.isLoading = false;
+      this.isLoadingTrendsRequest = false;
       this.mangaList = data.data;
     }, (err) => {
       this.isLoading = false;
+      this.isLoadingTrendsRequest = false;
       console.log(err);
     })
   }

@@ -19,11 +19,19 @@
     <p>Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
     <p>Estado: <span>{{data.data.state}} </span> </p>
     <article>{{data.data.description}}</article>
+    
+    <p *ngIf="isFavorite" id="percentageRead">{{getPercentage()}} de capitulos leídos en total.</p>
     <br>
     <div class="chapterList">
-      <div *ngFor="let ch of data.data.chapterList" (click)="readChapter(ch.chapterUrl)" >
+      <div *ngFor="let ch of data.data.chapterList;let i = index" (click)="readChapter(ch.chapterUrl)">
         <hr>
-        <p>{{ch.chapter}}</p>
+        <div class="seeChapterDiv" (click)="seeChapter(data.data.chapterList.length-i)">
+          <ion-icon *ngIf="!isFavorite" name="book-outline"></ion-icon>
+          <ion-icon *ngIf="isFavorite && isChapterRead(data.data.chapterList.length-i)"  name="eye-outline"></ion-icon> 
+          <ion-icon *ngIf="isFavorite && !isChapterRead(data.data.chapterList.length-i)" class="noRead"  name="eye-off-outline"></ion-icon>
+        </div>
+        <!-- <ion-icon name="eye-outline"></ion-icon> -->
+        <p class="chapter">{{ch.chapter}}</p>
       </div>
     </div>
     <br><br>

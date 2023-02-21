@@ -12,6 +12,8 @@ import { MangaService } from 'src/app/services/manga.service';
 export class Tab1Page {
   mangaList: Array<HomeManga> = [];
   isLoading = false;
+  isLoadingHomeRequest = false;
+  isLoadingMangaInfoRequest = false;
   constructor(
     private mangaService: MangaService,
     public modalController: ModalController
@@ -21,11 +23,14 @@ export class Tab1Page {
 
   getMangaHome() {
     this.isLoading = true;
+    this.isLoadingHomeRequest = true;
     this.mangaService.getHomeManga().subscribe((data: any) => {
       this.isLoading = false;
+      this.isLoadingHomeRequest = false;
       this.mangaList = data.data;
     }, (err) => {
       this.isLoading = false;
+      this.isLoadingHomeRequest = false;
       console.log(err);
     })
   }
@@ -36,19 +41,20 @@ export class Tab1Page {
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
+    this.isLoadingMangaInfoRequest = true;
     this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }).subscribe((data: any) => {
       this.isLoading = false;
+      this.isLoadingMangaInfoRequest = false;
       this.openModal(data, mangaUrl);
     }, (err) => {
       this.isLoading = false;
+      this.isLoadingMangaInfoRequest = false;
       console.log(err);
-      alert(JSON.stringify(err))
     })
   }
 
   async openModal(mangaInfo: any, mangaUrl: string) {
     const modal = await this.modalController.create({
-      
       component: MangaInfoPage,
       componentProps: {
         data: mangaInfo,
@@ -61,7 +67,6 @@ export class Tab1Page {
         //alert('Modal Sent Data :'+ dataReturned);
       }
     });
-
     return await modal.present();
   }
 
