@@ -7,22 +7,36 @@ ion-content {
     // background-size: cover;
 }
 
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 
-ion-card{
+    ion-card {
+        margin: 5px 0;
+        width: calc(50% - 15px);
+    }
+}
+
+
+ion-card {
     text-align: center;
     margin: 1em 3em 2em;
     border: 2px solid #3021e7;
-    img{
+
+    img {
         width: 70%;
-        margin-top: 15px;
+        margin-top: 20px;
     }
-    ion-card-title{
+
+    ion-card-title {
         color: black;
         font-style: italic;
+        font-size: 17px;
     }
 }
 
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
-  }
+}

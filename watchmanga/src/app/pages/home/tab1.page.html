@@ -4,7 +4,8 @@
     <img src="https://media.tenor.com/0bovYFh_cT4AAAAC/waiting-checking-phone.gif" alt="">
   </div>
 
-  <div>
+
+  <div id="cards-container">
     <ion-card *ngFor="let manga of mangaList" (click)="getMangaInfo(manga.mangaUrl)">
       <img alt="Silhouette of mountains" src={{getImageUrl(manga.imageUrl)}} />
       <ion-card-header>
@@ -13,6 +14,16 @@
       </ion-card-header>
     </ion-card>
   </div>
+
+  <!-- <div>
+    <ion-card *ngFor="let manga of mangaList" (click)="getMangaInfo(manga.mangaUrl)">
+      <img alt="Silhouette of mountains" src={{getImageUrl(manga.imageUrl)}} />
+      <ion-card-header>
+        <ion-card-title>{{manga.title}}</ion-card-title>
+        <ion-card-subtitle>{{manga.date}}</ion-card-subtitle>
+      </ion-card-header>
+    </ion-card>
+  </div> -->
 
   <ngx-loading [show]="isLoading" [config]="{
     backdropBorderRadius: '5px', fullScreenBackdrop:true}"></ngx-loading>

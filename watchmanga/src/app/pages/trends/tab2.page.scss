@@ -7,6 +7,17 @@ ion-content {
     // background-size: cover;
 }
 
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    ion-card {
+        margin: 5px 0;
+        width: calc(50% - 15px);
+    }
+}
+
 
 ion-card{
     text-align: center;
@@ -14,11 +25,13 @@ ion-card{
     border: 2px solid #3021e7;
     img{
         width: 70%;
+        margin-top: 20px;
     }
 
     ion-card-title{
         color: black;
         font-style: italic;
+        font-size: 17px;
     }
 }
 

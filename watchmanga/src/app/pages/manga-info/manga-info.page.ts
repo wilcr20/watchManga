@@ -78,6 +78,7 @@ export class MangaInfoPage implements OnInit {
           readList: []
         }
         list.push(favorite);
+        this.currentFavorite = favorite;
         this.isFavorite = true;
         localStorage.setItem("favorites", JSON.stringify(list));
       }

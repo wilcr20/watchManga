@@ -11,8 +11,8 @@
 
 <ion-content>
   <div class="body">
-    <button *ngIf="!isFavorite" (click)="addToFavorite()"><ion-icon name="heart-outline"></ion-icon></button>
-    <button *ngIf="isFavorite" (click)="removeToFavorite()"><ion-icon name="heart-dislike-outline"></ion-icon></button>
+    <button *ngIf="!isFavorite" (click)="addToFavorite()"><ion-icon style="opacity: 0.5;" name="heart-outline"></ion-icon></button>
+    <button *ngIf="isFavorite" (click)="removeToFavorite()"><ion-icon name="heart-outline" ></ion-icon></button>
 
     <img src={{getMangaImgUrl()}} alt="" srcset="">
     <h3>{{data.data.title}}</h3>
