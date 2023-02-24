@@ -75,7 +75,8 @@ export class MangaInfoPage implements OnInit {
           url: navData.url,
           title: this.data.data.title,
           imgUrl: this.data.data.imageUrl,
-          readList: []
+          readList: [],
+          tab: "ALL"
         }
         list.push(favorite);
         this.currentFavorite = favorite;
@@ -109,23 +110,7 @@ export class MangaInfoPage implements OnInit {
 
   }
 
-  isChapterRead(chaptNumber: number) {
-    if (this.currentFavorite) {
-      if (this.currentFavorite.readList.length == 0) {
-        return false;
-      }
-      let isRead = false;
-      this.currentFavorite.readList.forEach((element: any) => {
-        if (element.chapter == chaptNumber) {
-          isRead = true;
-        }
-      });
-      return isRead;
-    }
-
-    return false
-
-  }
+  
 
   seeChapter(chaptNumber: number) {
     this.isLoading = true;
@@ -146,6 +131,22 @@ export class MangaInfoPage implements OnInit {
       }
     }
     this.isLoading = false;
+  }
+
+  isChapterRead(chaptNumber: number) {
+    if (this.currentFavorite) {
+      if (this.currentFavorite.readList.length == 0) {
+        return false;
+      }
+      let isRead = false;
+      this.currentFavorite.readList.forEach((element: any) => {
+        if (element.chapter == chaptNumber) {
+          isRead = true;
+        }
+      });
+      return isRead;
+    }
+    return false;
   }
 
   getPercentage() {

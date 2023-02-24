@@ -1,7 +1,25 @@
 <ion-content>
   <div class="noFavorites" *ngIf="favoriteList.length == 0">
-    <p>No hay favoritos agregados.</p>
+    <p>No hay mangas agregados para el tab {{tabText}}.</p>
   </div>
+
+  <div class="segmentTabs">
+    <ion-segment value="default">
+      <ion-segment-button (click)="selectAll()" value="default">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button (click)="selectMangaFinished()" value="segment1">
+        <ion-icon name="checkbox-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button (click)="selectMangaPause()" value="segment2">
+        <ion-icon name="stop-circle-outline"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button (click)="selectMangaJustForMe()" value="segment3">
+        <ion-icon name="flame-outline"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
 
 
   <div class="favoriteList" *ngIf="favoriteList.length > 0">
@@ -12,6 +30,17 @@
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
           <h2>{{favorite.title}} </h2>
+          <br>
+          <div class="divOptions">
+            <ion-icon class="all" (click)="setMangaForAll(favorite.url, favorite.tab)"
+              [ngClass]="{ 'tabSelected': favorite.tab == 'ALL' }" name="heart-outline"></ion-icon>
+            <ion-icon class="finished" (click)="setMangaFinished(favorite.url, favorite.tab)"
+              [ngClass]="{ 'tabSelected': favorite.tab == 'FINISHED' }" name="checkbox-outline"></ion-icon>
+            <ion-icon class="paused" (click)="setMangaPaused(favorite.url, favorite.tab)"
+              [ngClass]="{ 'tabSelected': favorite.tab == 'PAUSED' }" name="stop-circle-outline"></ion-icon>
+            <ion-icon class="justforme" (click)="setMangaForMe(favorite.url, favorite.tab)"
+              [ngClass]="{ 'tabSelected': favorite.tab == 'JUST_FOR_ME' }" name="flame-outline"></ion-icon>
+          </div>
         </ion-label>
       </ion-item>
     </ion-list>

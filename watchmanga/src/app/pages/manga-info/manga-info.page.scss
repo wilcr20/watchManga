@@ -3,8 +3,6 @@ ion-content {
     background-position: center center;
     background-repeat: no-repeat;
     background-color: black;
-    // background-image: url("../../../assets/images/bg.png");
-    // background-size: cover;
 }
 
 ion-buttons {
@@ -83,7 +81,7 @@ ion-buttons {
             font-size: 20px;
             color: chartreuse;
             text-align: start;
-            width: 9%;
+            width: 10%;
 
             .noRead {
                 opacity: 0.3;

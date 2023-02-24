@@ -3,8 +3,6 @@ ion-content {
     background-position: center center;
     background-repeat: no-repeat;
     background-color: black;
-    // background-image: url("../../../assets/images/bg.png");
-    // background-size: cover;
 }
 
 
@@ -15,6 +13,7 @@ ion-content {
 
     p {
         color: chartreuse;
+        margin: 0 3em;
     }
 }
 
@@ -27,9 +26,39 @@ ion-content {
         height: 155px;
 
         h2 {
-            font-size: 14px;
+            font-size: 15px;
             color: white;
             text-align: initial;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .divOptions {
+            margin-top: 10px;
+            font-size: 20px;
+            display: flex;
+            justify-content: space-between;
+            ion-icon{
+                &.all{
+                    color: red;
+                }
+                &.finished{
+                    color: #20d720;
+                }
+                &.paused{
+                    color: yellow;
+                }
+                &.justforme{
+                    color: rgb(221, 84, 10);
+                }
+
+                &.tabSelected{
+                    opacity: 0.4;
+                }
+            }
         }
 
     }
@@ -40,10 +69,19 @@ ion-content {
         --border-radius: 14px;
     }
 
-
     margin: 2em 1em;
 
     ion-list {
         background: black;
+    }
+}
+
+.segmentTabs {
+    margin-bottom: -15px;
+    position: relative;
+
+    ion-segment-button:not(.segment-button-checked) {
+        color: chartreuse;
+        opacity: 0.5;
     }
 }
