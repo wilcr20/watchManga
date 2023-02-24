@@ -22,19 +22,19 @@ export class FavoritesPage {
   tabText: string = "ALL";
 
   ionViewWillEnter() {
-    this.getFavoriteList(true)
+    this.getFavoriteList(true);
+    this.tabText = "ALL";
   }
 
   getFavoriteList(isFilterForAll: boolean) {
     let favoriteListTemp = localStorage.getItem("favorites");
     if (favoriteListTemp) {
       this.favoriteList = JSON.parse(favoriteListTemp).reverse();
-      this.temp_favoriteList = JSON.parse(favoriteListTemp).reverse();
+      this.temp_favoriteList = JSON.parse(favoriteListTemp);
       if (isFilterForAll) {
         this.favoriteList = this.favoriteList.filter((manga: { tab: string; }) => manga.tab == "ALL");
-        this.tabText = "ALL";
+        // this.tabText = "ALL";
       }
-      // localStorage.setItem("favorites", JSON.stringify(this.favoriteList.reverse()))
     }
   }
 
@@ -56,7 +56,6 @@ export class FavoritesPage {
       })
     }
     this.isSetNewTabSelected = true;
-
   }
 
   async openModal(mangaInfo: any, mangaUrl: string) {
@@ -68,7 +67,8 @@ export class FavoritesPage {
       }
     });
     modal.onDidDismiss().then(() => {
-      // this.getFavoriteList(false);
+      this.getFavoriteList(true);
+      this.updateFavoriteList();
     });
     return await modal.present();
   }
@@ -82,7 +82,7 @@ export class FavoritesPage {
     }
     this.temp_favoriteList.filter((fav: { url: string; }) => fav.url == url)[0].tab = "ALL";
     localStorage.setItem("favorites", JSON.stringify(this.temp_favoriteList));
-
+    this.updateFavoriteList();
   }
 
   setMangaFinished(url: string, tab: string) {
@@ -92,6 +92,7 @@ export class FavoritesPage {
     }
     this.temp_favoriteList.filter((fav: { url: string; }) => fav.url == url)[0].tab = "FINISHED";
     localStorage.setItem("favorites", JSON.stringify(this.temp_favoriteList));
+    this.updateFavoriteList();
   }
 
   setMangaPaused(url: string, tab: string) {
@@ -101,6 +102,7 @@ export class FavoritesPage {
     }
     this.temp_favoriteList.filter((fav: { url: string; }) => fav.url == url)[0].tab = "PAUSED";
     localStorage.setItem("favorites", JSON.stringify(this.temp_favoriteList));
+    this.updateFavoriteList();
   }
 
   setMangaForMe(url: string, tab: string) {
@@ -110,6 +112,7 @@ export class FavoritesPage {
     }
     this.temp_favoriteList.filter((fav: { url: string; }) => fav.url == url)[0].tab = "JUST_FOR_ME";
     localStorage.setItem("favorites", JSON.stringify(this.temp_favoriteList));
+    this.updateFavoriteList();
   }
 
 
@@ -119,6 +122,7 @@ export class FavoritesPage {
     this.getFavoriteList(true);
     this.favoriteList = this.favoriteList.filter((manga: { tab: string; }) => manga.tab == "ALL");
   }
+  
 
   selectMangaFinished() {
     this.tabText = "FINALIZADOS"
@@ -126,7 +130,7 @@ export class FavoritesPage {
     this.favoriteList = this.favoriteList.filter((manga: { tab: string; }) => manga.tab == "FINISHED");
   }
 
-  selectMangaPause() {
+  selectMangaPaused() {
     this.tabText = "PAUSADOS";
     this.getFavoriteList(false);
     this.favoriteList = this.favoriteList.filter((manga: { tab: string; }) => manga.tab == "PAUSED");
@@ -136,6 +140,18 @@ export class FavoritesPage {
     this.tabText = "SOLO PARA MÍ";
     this.getFavoriteList(false);
     this.favoriteList = this.favoriteList.filter((manga: { tab: string; }) => manga.tab == "JUST_FOR_ME");
+  }
+
+  updateFavoriteList() {
+    if (this.tabText == "ALL") {
+      this.selectAll();
+    } else if (this.tabText == "FINALIZADOS") {
+      this.selectMangaFinished();
+    } else if (this.tabText == "PAUSADOS") {
+      this.selectMangaPaused();
+    } else if (this.tabText == "SOLO PARA MÍ") {
+      this.selectMangaJustForMe();
+    }
   }
 
 }
