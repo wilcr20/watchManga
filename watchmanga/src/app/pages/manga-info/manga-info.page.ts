@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InAppBrowserOptions, InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { InAppBrowserOptions, InAppBrowser, InAppBrowserEventType } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Favorite } from 'src/app/interfaces/favorite.interface';
 
@@ -104,13 +104,26 @@ export class MangaInfoPage implements OnInit {
     if (this.isReadingChapter) {
       let chapterUrl = "https://www.leercapitulo.com" + url;
       let target = "_blank";
-      this.theInAppBrowser.create(chapterUrl, target, this.options);
+      let browser = this.theInAppBrowser.create(chapterUrl, target, this.options);
+
+
+      browser.on("loadstart").subscribe(() => {
+        browser.executeScript({
+          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {console.log(iframes);for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 300); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+        });
+      });
+
+
+      browser.on('loadstop').subscribe(() => {
+        browser.executeScript({
+          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {console.log(iframes);for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 300); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+        });
+      });
     }
     this.isReadingChapter = true;
+    setInterval
 
   }
-
-  
 
   seeChapter(chaptNumber: number) {
     this.isLoading = true;

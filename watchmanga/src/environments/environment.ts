@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   // apiUrl: "http://localhost:3000/manga/leercapitulo/"
-  apiUrl: "https://watchmanga.onrender.com/manga/leercapitulo/"
+  // apiUrl: "https://watchmanga.onrender.com/manga/leercapitulo/"
+  apiUrl: "https://sangria-cockroach-sock.cyclic.app/manga/leercapitulo/"
 };
 
 /*

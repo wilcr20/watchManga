@@ -3,8 +3,6 @@ ion-content {
     background-position: center center;
     background-repeat: no-repeat;
     background-color: black;
-    // background-image: url("../../../assets/images/bg.png");
-    // background-size: cover;
 }
 
 
@@ -12,6 +10,12 @@ ion-content {
     position: relative;
     top: 3%;
     margin: 0 1em;
+
+    .categories-search {
+        // border: 1px solid chartreuse;
+        margin-top: 15px;
+        margin-bottom: 3em;
+    }
 
     .noSearchResult {
         text-align: center;
@@ -30,26 +34,89 @@ ion-content {
             border: 1px solid chartreuse;
             margin-bottom: 1em;
             height: 155px;
-    
+
             h2 {
                 font-size: 14px;
                 color: white;
                 text-align: initial;
             }
-    
+
         }
-    
+
         ion-thumbnail {
             width: 30%;
             height: 100%;
             --border-radius: 14px;
         }
-    
-    
+
+
         margin: 1em 1em;
-    
+
         ion-list {
             background: black;
         }
     }
+}
+
+ion-button {
+    --background: white;
+    font-size: 12px;
+    width: 150px;
+    margin: 5px;
+    text-transform: capitalize;
+    --color: black;
+    --border-color: #000;
+    --border-style: solid;
+    --border-width: 1px;
+
+    --box-shadow: 2px 2px 3px 0 rgb(34 139 45);
+
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+}
+
+
+#cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+
+    ion-card {
+        margin: 5px 0;
+        width: calc(50% - 15px);
+    }
+}
+
+ion-card {
+    text-align: center;
+    margin: 1em 3em 2em;
+    border: 2px solid #3021e7;
+
+    img {
+        width: 70%;
+        margin-top: 20px;
+    }
+
+    ion-card-title {
+        color: black;
+        font-style: italic;
+        font-size: 17px;
+    }
+}
+
+ion-card-header.ios {
+    display: flex;
+    flex-flow: column-reverse;
+}
+
+
+.closeButton{
+    color: chartreuse;
+    background: black;
+    font-size: 20px;
+    z-index: 99999999999999;
+    border: 2px solid gray;
+    position: fixed;
+    padding: 5px 7px;
+    border-radius: 50%;
 }

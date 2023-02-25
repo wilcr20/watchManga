@@ -25,5 +25,9 @@ export class MangaService {
     let params = new HttpParams().set('term', search);
     return this.httpClient.get(environment.apiUrl + 'search', { params: params });
   }
+
+  searchMangaGenre(genre: string) {
+    return this.httpClient.post(environment.apiUrl + 'searchByGenre', {genre: genre});
+  }
   
 }

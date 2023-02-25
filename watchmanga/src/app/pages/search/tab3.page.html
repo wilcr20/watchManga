@@ -1,17 +1,24 @@
 <ion-content [fullscreen]="true">
 
   <div class="body">
-    <ion-searchbar (ionChange)="setValue()" [(ngModel)]="seachValue" show-clear-button="always"
-      placeholder="Ingrese el texto a buscar ..."></ion-searchbar>
+    <ion-searchbar *ngIf="!isSearchByCategory" (ionChange)="setValue()" [(ngModel)]="seachValue"
+      show-clear-button="always" placeholder="Ingrese el texto a buscar ..."></ion-searchbar>
 
-    <div *ngIf="!isSearchDone && searchResult.length == 0" style="text-align: center;">
+    <div *ngIf="!isSearchDone && searchResult.length == 0 && !isSearchByCategory" style="text-align: center;">
       <img src="https://media.tenor.com/3S9l9HzhGVcAAAAM/shake-kaninayuta.gif" alt="" srcset="">
+      <br>
+      <div class="categories-search">
+        <ion-button *ngFor="let categ of categories" shape="round" (click)="searchByGenreSelected(categ.url)">
+          {{categ.name}}
+        </ion-button>
+      </div>
     </div>
+
     <div class="noSearchResult" *ngIf="isSearchDone && searchResult.length == 0">
       <p>No se encontraron resultados para la búsqueda</p>
     </div>
 
-    <div class="searchResult" *ngIf="isSearchDone && searchResult.length > 0">
+    <div class="searchResult" *ngIf="isSearchDone && searchResult.length > 0 && !isSearchByCategory">
       <ion-list>
         <ion-item *ngFor="let result of searchResult" (click)="getMangaInfo(result.link)">
           <ion-thumbnail slot="start" class="ios hydrated">
@@ -23,6 +30,21 @@
         </ion-item>
       </ion-list>
     </div>
+
+    <div *ngIf="isSearchByCategory && searchResult.length > 0">
+      <button class="closeButton" (click)="goToSearchPage()" >X</button>
+      <div id="cards-container">
+        <ion-card *ngFor="let manga of searchResult" (click)="getMangaInfo(manga.mangaUrl)">
+          <img src={{getImageUrl(manga.imageUrl)}} />
+          <ion-card-header>
+            <ion-card-title>{{manga.title}}</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </div>
+      <br><br>
+    </div>
+
+
   </div>
 
   <ngx-loading [show]="isLoading" [config]="{
