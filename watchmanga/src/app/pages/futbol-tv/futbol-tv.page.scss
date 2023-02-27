@@ -1,0 +1,17 @@
+ion-content {
+    --background: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: black;
+}
+
+.main {
+    border: 1px dotted white;
+    margin: 2em 0.5em;
+    padding: 1em;
+
+    p {
+        color: chartreuse;
+        text-decoration: underline;
+    }
+}

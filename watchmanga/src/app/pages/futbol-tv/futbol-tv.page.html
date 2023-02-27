@@ -1,0 +1,11 @@
+
+<ion-content>
+
+
+  <div class="main">
+    <div *ngFor="let ch of listChannel">
+      <p (click)="openUrl(ch.url)" >{{ch.name}}</p>
+    </div>
+  </div>
+
+</ion-content>

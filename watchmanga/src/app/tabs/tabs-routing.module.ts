@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('../pages/favorites/favorites.module').then(m => m.FavoritesPageModule)
       },
       {
+        path: 'soccerTv',
+        loadChildren: () => import('../pages/futbol-tv/futbol-tv.module').then(m => m.FutbolTVPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'
