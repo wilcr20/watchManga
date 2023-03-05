@@ -22,7 +22,7 @@
       <ion-list>
         <ion-item *ngFor="let result of searchResult" (click)="getMangaInfo(result.link)">
           <ion-thumbnail slot="start" class="ios hydrated">
-            <img width="" src={{getImageUrl(result.thumbnail)}}>
+            <img src={{getImageUrl(result.thumbnail)}} onerror="this.src='../../../assets/imgNotFound.jpg'">
           </ion-thumbnail>
           <ion-label class="ion-text-wrap">
             <h2>{{result.label}} </h2>
@@ -35,7 +35,7 @@
       <button class="closeButton" (click)="goToSearchPage()" >X</button>
       <div id="cards-container">
         <ion-card *ngFor="let manga of searchResult" (click)="getMangaInfo(manga.mangaUrl)">
-          <img src={{getImageUrl(manga.imageUrl)}} />
+          <img src={{getImageUrl(manga.imageUrl)}} onerror="this.src='../../../assets/imgNotFound.jpg'" />
           <ion-card-header>
             <ion-card-title>{{manga.title}}</ion-card-title>
           </ion-card-header>

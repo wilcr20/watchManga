@@ -7,7 +7,7 @@
 
   <div id="cards-container">
     <ion-card *ngFor="let manga of mangaList" (click)="getMangaInfo(manga.mangaUrl)">
-      <img  src={{getImageUrl(manga.imageUrl)}} />
+      <img src={{getImageUrl(manga.imageUrl)}} onerror="this.src='../../../assets/imgNotFound.jpg'"/>
       <ion-card-header>
         <ion-card-title>{{manga.title}}</ion-card-title>
         <ion-card-subtitle>{{manga.date}}</ion-card-subtitle>

@@ -14,7 +14,7 @@
     <button *ngIf="!isFavorite" (click)="addToFavorite()"><ion-icon style="opacity: 0.5;" name="heart-outline"></ion-icon></button>
     <button *ngIf="isFavorite" (click)="removeToFavorite()"><ion-icon name="heart-outline" ></ion-icon></button>
 
-    <img src={{getMangaImgUrl()}} alt="" srcset="">
+    <img src={{getMangaImgUrl()}} onerror="this.src='../../../assets/imgNotFound.jpg'">
     <h3>{{data.data.title}}</h3>
     <p>Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
     <p>Estado: <span>{{data.data.state}} </span> </p>
