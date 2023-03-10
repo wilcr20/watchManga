@@ -9,8 +9,9 @@ export class AppComponent {
   constructor() {
     if(localStorage.getItem("favorites")){
       return;
-    }{
+    }else{
       localStorage.setItem("favorites", JSON.stringify([]));
     }
+    
   }
 }

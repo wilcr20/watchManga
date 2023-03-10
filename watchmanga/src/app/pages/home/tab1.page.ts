@@ -18,6 +18,9 @@ export class Tab1Page {
     private mangaService: MangaService,
     public modalController: ModalController
   ) {
+    if (localStorage.getItem("website") == null) {
+      localStorage.setItem("website", "leercapitulo");
+    }
     this.getMangaHome()
   }
 

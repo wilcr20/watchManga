@@ -31,13 +31,13 @@
           <h2>{{favorite.title}} </h2>
           <br>
           <div class="divOptions">
-            <ion-icon class="all" (click)="setMangaForAll(favorite.url, favorite.tab)"
+            <ion-icon *ngIf="favorite.tab != 'ALL'" class="all" (click)="setMangaForAll(favorite.url, favorite.tab)"
               [ngClass]="{ 'tabSelected': favorite.tab == 'ALL' }" name="heart-outline"></ion-icon>
-            <ion-icon class="finished" (click)="setMangaFinished(favorite.url, favorite.tab)"
+            <ion-icon *ngIf="favorite.tab != 'FINISHED'" class="finished" (click)="setMangaFinished(favorite.url, favorite.tab)"
               [ngClass]="{ 'tabSelected': favorite.tab == 'FINISHED' }" name="star-outline"></ion-icon>
-            <ion-icon class="paused" (click)="setMangaPaused(favorite.url, favorite.tab)"
+            <ion-icon *ngIf="favorite.tab != 'PAUSED'" class="paused" (click)="setMangaPaused(favorite.url, favorite.tab)"
               [ngClass]="{ 'tabSelected': favorite.tab == 'PAUSED' }" name="stop-circle-outline"></ion-icon>
-            <ion-icon class="justforme" (click)="setMangaForMe(favorite.url, favorite.tab)"
+            <ion-icon *ngIf="favorite.tab != 'JUST_FOR_ME'" class="justforme" (click)="setMangaForMe(favorite.url, favorite.tab)"
               [ngClass]="{ 'tabSelected': favorite.tab == 'JUST_FOR_ME' }" name="flame-outline"></ion-icon>
           </div>
         </ion-label>
