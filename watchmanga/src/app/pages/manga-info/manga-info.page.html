@@ -17,13 +17,14 @@
     <img src={{getMangaImgUrl()}} onerror="this.src='../../../assets/imgNotFound.jpg'">
     <h3>{{data.data.title}}</h3>
     <p>Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
-    <p>Estado: <span>{{data.data.state}} </span> </p>
+    <p>Sitio web: <span>{{getWebsiteName(data.data.website)}} </span> </p>
+    <p *ngIf="data.data.state">Estado: <span>{{data.data.state}} </span> </p>
     <article>{{data.data.description}}</article>
     
     <p *ngIf="isFavorite" id="percentageRead">{{getPercentage()}} de capitulos leídos en total.</p>
     <br>
     <div class="chapterList">
-      <div *ngFor="let ch of data.data.chapterList;let i = index" (click)="readChapter(ch.chapterUrl)">
+      <div *ngFor="let ch of data.data.chapterList;let i = index" (click)="readChapter(ch.chapterUrl, data.data.website)">
         <hr>
         <div class="seeChapterDiv" (click)="seeChapter(data.data.chapterList.length-i)">
           <ion-icon *ngIf="!isFavorite" name="book-outline"></ion-icon>

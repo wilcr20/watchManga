@@ -60,8 +60,7 @@ export class MangaInfoPage implements OnInit {
   }
 
   getMangaImgUrl() {
-    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
-    if (website.name == "LeerCapitulo") {
+    if (this.data.data.website == "leercapitulo") {
       return "https://www.leercapitulo.com" + this.data.data.imageUrl;
     }
     return this.data.data.imageUrl;
@@ -80,7 +79,8 @@ export class MangaInfoPage implements OnInit {
           title: this.data.data.title,
           imgUrl: this.data.data.imageUrl,
           readList: [],
-          tab: "ALL"
+          tab: "ALL",
+          website: this.data.data.website
         }
         list.push(favorite);
         this.currentFavorite = favorite;
@@ -104,11 +104,10 @@ export class MangaInfoPage implements OnInit {
     this.isLoading = false;
   }
 
-  readChapter(url: string) {
+  readChapter(url: string, website: string) {
     if (this.isReadingChapter) {
       let chapterUrl = "";
-      let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
-      if (website.name != "LeerCapitulo") {
+      if (website != "leercapitulo") {
         chapterUrl = url;
       } else {
         chapterUrl = "https://www.leercapitulo.com" + url;
@@ -181,5 +180,22 @@ export class MangaInfoPage implements OnInit {
       return percentage.toFixed(2).replace(".00", "") + "%";
     }
     return "0%";
+  }
+
+  getWebsiteName(websiteurl: string) {
+    switch (websiteurl) {
+      case "leercapitulo":
+        return "LeerCapitulo"
+        break;
+      case "tumanhwas":
+        return "TuManhwas";
+        break;
+      case "tmomanga":
+        return "TmoManga";
+        break;
+      default:
+        return null;
+        break;
+    }
   }
 }

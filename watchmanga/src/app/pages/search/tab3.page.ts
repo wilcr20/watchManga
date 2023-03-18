@@ -169,6 +169,7 @@ export class Tab3Page {
       this.mangaService.searchMangaTerm(this.seachValue)?.subscribe((data: any) => {
         this.isSearchDone = true;
         this.searchResult = data;
+       
       })
     }
   }
@@ -183,7 +184,7 @@ export class Tab3Page {
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
-    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
+    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }, "")?.subscribe((data: any) => {
       this.isLoading = false;
       this.openModal(data, mangaUrl);
     }, (err) => {

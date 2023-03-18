@@ -38,19 +38,18 @@ export class FavoritesPage {
     }
   }
 
-  getImageUrl(url: string) {
-    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
-    if(website.name == "LeerCapitulo"){
-      return "https://www.leercapitulo.com" + url;
+  getImageUrl(favorite: any) {
+    if(favorite.website == "leercapitulo"){
+      return "https://www.leercapitulo.com" + favorite.imgUrl;
     }
-    return url;
+    return favorite.imgUrl;
   }
 
 
-  getMangaInfo(mangaUrl: string) {
+  getMangaInfo(mangaUrl: string, website: string) {
     if (this.isSetNewTabSelected) {
       this.isLoading = true;
-      this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
+      this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }, website)?.subscribe((data: any) => {
         this.isLoading = false;
         this.openModal(data, mangaUrl);
       }, (err) => {

@@ -4,4 +4,5 @@ export interface Favorite{
     imgUrl: string;
     readList: [];
     tab: string;
+    website: string;
 }

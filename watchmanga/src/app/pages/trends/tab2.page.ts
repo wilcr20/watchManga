@@ -42,9 +42,9 @@ export class Tab2Page {
     return url;
   }
 
-  getMangaInfo(mangaUrl: string) {
+  getMangaInfo(mangaUrl: string, website: string) {
     this.isLoading = true;
-    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
+    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }, website)?.subscribe((data: any) => {
       this.isLoading = false;
       this.openModal(data, mangaUrl);
     }, (err) => {

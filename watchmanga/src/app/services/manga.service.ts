@@ -45,16 +45,15 @@ export class MangaService {
     }
   }
 
-  getMangaInfo(data: any) {
-    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
-    switch (website.name) {
-      case "LeerCapitulo":
+  getMangaInfo(data: any, website: string) {
+    switch (website) {
+      case "leercapitulo":
         return this.httpClient.post(environment.apiUrl + 'leercapitulo/mangaInfo', data);
         break;
-      case "TuManhwas":
+      case "tumanhwas":
         return this.httpClient.post(environment.apiUrl + 'tumanhwas/mangaInfo', data);
         break;
-      case "TmoManga":
+      case "tmomanga":
         return this.httpClient.post(environment.apiUrl + 'tmomanga/mangaInfo', data);
         break;
       default:
@@ -64,17 +63,17 @@ export class MangaService {
   }
 
   searchMangaTerm(search: string) {
-    let params = new HttpParams().set('term', search);
     let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
     switch (website.name) {
       case "LeerCapitulo":
+        let params = new HttpParams().set('term', search);
         return this.httpClient.get(environment.apiUrl + 'leercapitulo/search', { params: params });
         break;
       case "TuManhwas":
-        return this.httpClient.get(environment.apiUrl + 'tumanhwas/search', { params: params });
+        return this.httpClient.post(environment.apiUrl + 'tumanhwas/search', {term: search});
         break;
       case "TmoManga":
-        return this.httpClient.get(environment.apiUrl + 'tmomanga/search', { params: params });
+        return this.httpClient.post(environment.apiUrl + 'tmomanga/search', {term: search});
         break;
       default:
         return null;
