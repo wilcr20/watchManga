@@ -10,24 +10,94 @@ export class MangaService {
   constructor(public httpClient: HttpClient) { }
 
   getHomeManga() {
-    return this.httpClient.get(environment.apiUrl + 'home');
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    switch (website.name) {
+      case "LeerCapitulo":
+        return this.httpClient.get(environment.apiUrl + 'leercapitulo/home');
+        break;
+      case "TuManhwas":
+        return this.httpClient.get(environment.apiUrl + 'tumanhwas/home');
+        break;
+      case "TmoManga":
+        return this.httpClient.get(environment.apiUrl + 'tmomanga/home');
+        break;
+      default:
+        return null;
+        break;
+    }
   }
 
   getTrendsManga() {
-    return this.httpClient.get(environment.apiUrl + 'trends');
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    switch (website.name) {
+      case "LeerCapitulo":
+        return this.httpClient.get(environment.apiUrl + 'leercapitulo/trends');
+        break;
+      case "TuManhwas":
+        return this.httpClient.get(environment.apiUrl + 'tumanhwas/trends');
+        break;
+      case "TmoManga":
+        return this.httpClient.get(environment.apiUrl + 'tmomanga/trends');
+        break;
+      default:
+        return null;
+        break;
+    }
   }
 
   getMangaInfo(data: any) {
-    return this.httpClient.post(environment.apiUrl + 'mangaInfo', data);
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    switch (website.name) {
+      case "LeerCapitulo":
+        return this.httpClient.post(environment.apiUrl + 'leercapitulo/mangaInfo', data);
+        break;
+      case "TuManhwas":
+        return this.httpClient.post(environment.apiUrl + 'tumanhwas/mangaInfo', data);
+        break;
+      case "TmoManga":
+        return this.httpClient.post(environment.apiUrl + 'tmomanga/mangaInfo', data);
+        break;
+      default:
+        return null;
+        break;
+    }
   }
 
   searchMangaTerm(search: string) {
     let params = new HttpParams().set('term', search);
-    return this.httpClient.get(environment.apiUrl + 'search', { params: params });
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    switch (website.name) {
+      case "LeerCapitulo":
+        return this.httpClient.get(environment.apiUrl + 'leercapitulo/search', { params: params });
+        break;
+      case "TuManhwas":
+        return this.httpClient.get(environment.apiUrl + 'tumanhwas/search', { params: params });
+        break;
+      case "TmoManga":
+        return this.httpClient.get(environment.apiUrl + 'tmomanga/search', { params: params });
+        break;
+      default:
+        return null;
+        break;
+    }
   }
 
   searchMangaGenre(genre: string) {
-    return this.httpClient.post(environment.apiUrl + 'searchByGenre', {genre: genre});
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    switch (website.name) {
+      case "LeerCapitulo":
+        return this.httpClient.post(environment.apiUrl + 'leercapitulo/searchByGenre', { genre: genre });
+        break;
+      case "TuManhwas":
+        return this.httpClient.post(environment.apiUrl + 'tumanhwas/searchByGenre', { genre: genre });
+        break;
+      case "TmoManga":
+        return this.httpClient.post(environment.apiUrl + 'tmomanga/searchByGenre', { genre: genre });
+        break;
+      default:
+        return null;
+        break;
+    }
   }
-  
+
 }

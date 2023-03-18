@@ -46,7 +46,7 @@ export class MangaInfoPage implements OnInit {
     if (favoriteList) {
       let list = JSON.parse(favoriteList);
       list.forEach((el: any) => {
-        if (el.url == navData.url) {
+        if (el.url == navData.url || navData.url.includes(el.url.split("/manga/")[1])) {
           this.isFavorite = true;
           this.currentFavorite = el;
         }
@@ -60,7 +60,11 @@ export class MangaInfoPage implements OnInit {
   }
 
   getMangaImgUrl() {
-    return "https://www.leercapitulo.com" + this.data.data.imageUrl;
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    if (website.name == "LeerCapitulo") {
+      return "https://www.leercapitulo.com" + this.data.data.imageUrl;
+    }
+    return this.data.data.imageUrl;
   }
 
   addToFavorite() {
@@ -102,21 +106,27 @@ export class MangaInfoPage implements OnInit {
 
   readChapter(url: string) {
     if (this.isReadingChapter) {
-      let chapterUrl = "https://www.leercapitulo.com" + url;
+      let chapterUrl = "";
+      let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+      if (website.name != "LeerCapitulo") {
+        chapterUrl = url;
+      } else {
+        chapterUrl = "https://www.leercapitulo.com" + url;
+      }
       let target = "_blank";
       let browser = this.theInAppBrowser.create(chapterUrl, target, this.options);
 
 
       browser.on("loadstart").subscribe(() => {
         browser.executeScript({
-          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {console.log(iframes);for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 300); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 50); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
         });
       });
 
 
       browser.on('loadstop').subscribe(() => {
         browser.executeScript({
-          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {console.log(iframes);for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 300); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 50); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
         });
       });
     }

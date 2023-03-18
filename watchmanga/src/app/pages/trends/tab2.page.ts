@@ -23,7 +23,7 @@ export class Tab2Page {
   getMangaTrends() {
     this.isLoading = true;
     this.isLoadingTrendsRequest = true;
-    this.mangaService.getTrendsManga().subscribe((data: any) => {
+    this.mangaService.getTrendsManga()?.subscribe((data: any) => {
       this.isLoading = false;
       this.isLoadingTrendsRequest = false;
       this.mangaList = data.data;
@@ -34,13 +34,17 @@ export class Tab2Page {
     })
   }
 
-  getImageUrl(img: string){
-    return "https://www.leercapitulo.com"+img;
+  getImageUrl(url: string) {
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    if (website.name == "LeerCapitulo") {
+      return "https://www.leercapitulo.com" + url;
+    }
+    return url;
   }
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
-    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }).subscribe((data: any) => {
+    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
       this.isLoading = false;
       this.openModal(data, mangaUrl);
     }, (err) => {

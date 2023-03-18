@@ -166,21 +166,24 @@ export class Tab3Page {
       this.isSearchDone = false;
       this.searchResult = [];
     } else if (this.seachValue.trim() != "" && this.seachValue.length > 2) {
-      this.mangaService.searchMangaTerm(this.seachValue).subscribe((data: any) => {
+      this.mangaService.searchMangaTerm(this.seachValue)?.subscribe((data: any) => {
         this.isSearchDone = true;
         this.searchResult = data;
-        console.log("- ", this.searchResult);
       })
     }
   }
 
   getImageUrl(url: string) {
-    return "https://www.leercapitulo.com" + url;
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    if(website.name == "LeerCapitulo"){
+      return "https://www.leercapitulo.com" + url;
+    }
+    return url;
   }
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
-    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }).subscribe((data: any) => {
+    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
       this.isLoading = false;
       this.openModal(data, mangaUrl);
     }, (err) => {
@@ -205,11 +208,10 @@ export class Tab3Page {
 
   searchByGenreSelected(url: string) {
     this.isLoading = true;
-    this.mangaService.searchMangaGenre(url).subscribe((data: any) => {
+    this.mangaService.searchMangaGenre(url)?.subscribe((data: any) => {
       this.isLoading = false
       this.isSearchByCategory = true;
       this.searchResult = data.data;
-      console.log(this.searchResult);
     }, (err) => { 
       this.isLoading = false;
      })

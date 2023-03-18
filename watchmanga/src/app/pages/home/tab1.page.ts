@@ -18,16 +18,21 @@ export class Tab1Page {
     private mangaService: MangaService,
     public modalController: ModalController
   ) {
-    if (localStorage.getItem("website") == null) {
-      localStorage.setItem("website", "leercapitulo");
-    }
+    let websites = [ 
+      {name: "LeerCapitulo", url:"https://www.leercapitulo.com/", imgUrl: "https://www.leercapitulo.com/assets/6614b1b9/images/logo.png"},
+      {name: "TuManhwas", url:"https://tumanhwas.com/", imgUrl: "https://tumanhwas.com/logo3.png"},
+      {name: "TmoManga", url:"https://tmomanga.com/", imgUrl: "https://tmomanga.com/img/logo.png"},
+    ]
+    localStorage.setItem("mangasUrls",JSON.stringify(websites));
+    localStorage.removeItem("website");
+    localStorage.setItem("websiteSelected", JSON.stringify(websites[0]))
     this.getMangaHome()
   }
 
   getMangaHome() {
     this.isLoading = true;
     this.isLoadingHomeRequest = true;
-    this.mangaService.getHomeManga().subscribe((data: any) => {
+    this.mangaService.getHomeManga()?.subscribe((data: any) => {
       this.isLoading = false;
       this.isLoadingHomeRequest = false;
       this.mangaList = data.data;
@@ -38,14 +43,18 @@ export class Tab1Page {
     })
   }
 
-  getImageUrl(img: string) {
-    return "https://www.leercapitulo.com" + img;
+  getImageUrl(url: string) {
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    if(website.name == "LeerCapitulo"){
+      return "https://www.leercapitulo.com" + url;
+    }
+    return url;
   }
 
   getMangaInfo(mangaUrl: string) {
     this.isLoading = true;
     this.isLoadingMangaInfoRequest = true;
-    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }).subscribe((data: any) => {
+    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
       this.isLoading = false;
       this.isLoadingMangaInfoRequest = false;
       this.openModal(data, mangaUrl);

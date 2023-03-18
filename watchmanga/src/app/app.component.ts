@@ -12,6 +12,6 @@ export class AppComponent {
     }else{
       localStorage.setItem("favorites", JSON.stringify([]));
     }
-    
+   
   }
 }

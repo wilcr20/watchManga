@@ -39,20 +39,23 @@ export class FavoritesPage {
   }
 
   getImageUrl(url: string) {
-    return "https://www.leercapitulo.com" + url;
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    if(website.name == "LeerCapitulo"){
+      return "https://www.leercapitulo.com" + url;
+    }
+    return url;
   }
 
 
   getMangaInfo(mangaUrl: string) {
     if (this.isSetNewTabSelected) {
       this.isLoading = true;
-      this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }).subscribe((data: any) => {
+      this.mangaService.getMangaInfo({ mangaUrl: mangaUrl })?.subscribe((data: any) => {
         this.isLoading = false;
         this.openModal(data, mangaUrl);
       }, (err) => {
         this.isLoading = false;
         console.log(err);
-        alert(JSON.stringify(err))
       })
     }
     this.isSetNewTabSelected = true;
