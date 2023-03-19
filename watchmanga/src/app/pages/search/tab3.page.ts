@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import { MangaService } from 'src/app/services/manga.service';
 import { MangaInfoPage } from '../manga-info/manga-info.page';
 
@@ -148,10 +148,16 @@ export class Tab3Page {
       url: "vida-escolar/"
     }
   ];
+  websites = [
+    { name: "LeerCapitulo", url: "https://www.leercapitulo.com/", imgUrl: "https://www.leercapitulo.com/assets/6614b1b9/images/logo.png" },
+    { name: "TuManhwas", url: "https://tumanhwas.com/", imgUrl: "https://i.imgur.com/VlLoINI.png" },
+    { name: "TmoManga", url: "https://tmomanga.com/", imgUrl: "https://tmomanga.com/img/logo.png" },
+  ];
 
   constructor(
-    private mangaService: MangaService,
-    public modalController: ModalController
+    public mangaService: MangaService,
+    public modalController: ModalController,
+    private alertController: AlertController
   ) { }
 
   ionViewWillEnter() {
@@ -168,29 +174,27 @@ export class Tab3Page {
     } else if (this.seachValue.trim() != "" && this.seachValue.length > 2) {
       this.mangaService.searchMangaTerm(this.seachValue)?.subscribe((data: any) => {
         this.isSearchDone = true;
-        this.searchResult = data;
+        this.searchResult = data.data;
        
       })
     }
   }
 
-  getImageUrl(url: string) {
-    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
-    if(website.name == "LeerCapitulo"){
-      return "https://www.leercapitulo.com" + url;
+  getImageUrl(manga: any) {
+    if(manga.website == "leercapitulo"){
+      return "https://www.leercapitulo.com" + manga.imageUrl;
     }
-    return url;
+    return manga.imageUrl;
   }
 
-  getMangaInfo(mangaUrl: string) {
+  getMangaInfo(mangaUrl: string, website: string) {
     this.isLoading = true;
-    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }, "")?.subscribe((data: any) => {
+    this.mangaService.getMangaInfo({ mangaUrl: mangaUrl }, website)?.subscribe((data: any) => {
       this.isLoading = false;
       this.openModal(data, mangaUrl);
     }, (err) => {
       this.isLoading = false;
       console.log(err);
-      alert(JSON.stringify(err))
     })
   }
 
@@ -222,6 +226,70 @@ export class Tab3Page {
     this.searchResult = [];
     this.isSearchByCategory = false;
     this.isSearchDone = false;
+    this.seachValue = "";
+  }
+
+  async changeWebsiteSelected() {
+    const alert = await this.alertController.create({
+      header: 'Selecciona un website',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'OK',
+          handler: (data) => {
+            this.updateWebsite(data);
+          }
+        }
+      ],
+      inputs: [
+        {
+          label: 'LeerCapitulo',
+          type: 'radio',
+          value: 'leercapitulo',
+        },
+        {
+          label: 'TuManhwas',
+          type: 'radio',
+          value: 'tumanhwas',
+        },
+        {
+          label: 'TmoManga',
+          type: 'radio',
+          value: 'tmomanga',
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+  updateWebsite(data: string) {
+    this.goToSearchPage();
+    switch (data) {
+      case "leercapitulo":
+        if(this.mangaService.getMangaWebSiteSelected().name != "LeerCapitulo"){
+          localStorage.setItem("websiteSelected", JSON.stringify(this.websites[0]));
+        }
+        break;
+      case "tumanhwas":
+        if(this.mangaService.getMangaWebSiteSelected().name != "TuManhwas"){
+          localStorage.setItem("websiteSelected", JSON.stringify(this.websites[1]));
+        }
+        break;
+      case "tmomanga":
+        if(this.mangaService.getMangaWebSiteSelected().name != "TmoManga"){
+          localStorage.setItem("websiteSelected", JSON.stringify(this.websites[2]));
+        }
+        break;
+      default:
+        break;
+    }
   }
 
 }

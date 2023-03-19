@@ -9,6 +9,10 @@ export class MangaService {
 
   constructor(public httpClient: HttpClient) { }
 
+  getMangaWebSiteSelected(){
+    return JSON.parse(localStorage.getItem("websiteSelected") as string);
+  }
+
   getHomeManga() {
     let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
     switch (website.name) {
@@ -51,6 +55,9 @@ export class MangaService {
         return this.httpClient.post(environment.apiUrl + 'leercapitulo/mangaInfo', data);
         break;
       case "tumanhwas":
+        if(!data.mangaUrl.includes("https://tumanhwas.com/manga/")){
+          data.mangaUrl = "https://tumanhwas.com/manga/"+ data.mangaUrl;
+        }
         return this.httpClient.post(environment.apiUrl + 'tumanhwas/mangaInfo', data);
         break;
       case "tmomanga":

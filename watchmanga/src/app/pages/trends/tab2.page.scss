@@ -3,8 +3,14 @@ ion-content {
     background-position: center center;
     background-repeat: no-repeat;
     background-color: black;
-    // background-image: url("../../../assets/images/bg.png");
-    // background-size: cover;
+}
+
+.notFound {
+    margin-top: 33%;
+    color: chartreuse;
+    p {
+        text-align: center;
+    }
 }
 
 #cards-container {
@@ -19,16 +25,17 @@ ion-content {
 }
 
 
-ion-card{
+ion-card {
     text-align: center;
     margin: 1em 3em 2em;
     border: 2px solid #3021e7;
-    img{
+
+    img {
         width: 70%;
         margin-top: 20px;
     }
 
-    ion-card-title{
+    ion-card-title {
         color: black;
         font-style: italic;
         font-size: 17px;
@@ -38,4 +45,8 @@ ion-card{
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
-  }
+}
+
+.webisteLogo {
+    max-width: 13em;
+}

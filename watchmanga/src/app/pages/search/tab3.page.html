@@ -1,3 +1,14 @@
+<ion-header (click)="changeWebsiteSelected()">
+  <ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <img class="webisteLogo" src={{mangaService.getMangaWebSiteSelected().imgUrl}} alt="">
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
+
 <ion-content [fullscreen]="true">
 
   <div class="body">
@@ -20,12 +31,12 @@
 
     <div class="searchResult" *ngIf="isSearchDone && searchResult.length > 0 && !isSearchByCategory">
       <ion-list>
-        <ion-item *ngFor="let result of searchResult" (click)="getMangaInfo(result.link)">
+        <ion-item *ngFor="let result of searchResult" (click)="getMangaInfo(result.mangaUrl, result.website)">
           <ion-thumbnail slot="start" class="ios hydrated">
-            <img src={{getImageUrl(result.thumbnail)}} onerror="this.src='../../../assets/imgNotFound.jpg'">
+            <img src={{getImageUrl(result)}} onerror="this.src='../../../assets/imgNotFound.jpg'">
           </ion-thumbnail>
           <ion-label class="ion-text-wrap">
-            <h2>{{result.label}} </h2>
+            <h2>{{result.title}} </h2>
           </ion-label>
         </ion-item>
       </ion-list>
@@ -34,8 +45,8 @@
     <div *ngIf="isSearchByCategory && searchResult.length > 0">
       <button class="closeButton" (click)="goToSearchPage()" >X</button>
       <div id="cards-container">
-        <ion-card *ngFor="let manga of searchResult" (click)="getMangaInfo(manga.mangaUrl)">
-          <img src={{getImageUrl(manga.imageUrl)}} onerror="this.src='../../../assets/imgNotFound.jpg'" />
+        <ion-card *ngFor="let manga of searchResult" (click)="getMangaInfo(manga.mangaUrl, manga.website)">
+          <img src={{getImageUrl(manga)}} onerror="this.src='../../../assets/imgNotFound.jpg'" />
           <ion-card-header>
             <ion-card-title>{{manga.title}}</ion-card-title>
           </ion-card-header>

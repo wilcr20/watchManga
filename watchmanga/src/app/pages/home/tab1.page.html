@@ -1,13 +1,26 @@
+<ion-header (click)="changeWebsiteSelected()">
+  <ion-toolbar>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <img class="webisteLogo" src={{mangaService.getMangaWebSiteSelected().imgUrl}} alt="">
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true">
 
   <div *ngIf="isLoadingHomeRequest" style="text-align: center;position: absolute;top: 30%;right: 0;">
     <img src="https://media.tenor.com/FIGMhsHZSIIAAAAC/anime-excited.gif" alt="">
   </div>
 
+  <div class="notFound" *ngIf="mangaList.length == 0 && !isLoadingHomeRequest">
+    <p>No se encontraron mangas.</p>
+  </div>
 
-  <div id="cards-container">
+  <div id="cards-container" *ngIf="mangaList.length > 0">
     <ion-card *ngFor="let manga of mangaList" (click)="getMangaInfo(manga.mangaUrl, manga.website)">
-      <img src={{getImageUrl(manga.imageUrl)}} onerror="this.src='../../../assets/imgNotFound.jpg'"/>
+      <img src={{getImageUrl(manga)}} onerror="this.src='../../../assets/imgNotFound.jpg'" />
       <ion-card-header>
         <ion-card-title>{{manga.title}}</ion-card-title>
         <ion-card-subtitle>{{manga.date}}</ion-card-subtitle>
@@ -15,15 +28,7 @@
     </ion-card>
   </div>
 
-  <!-- <div>
-    <ion-card *ngFor="let manga of mangaList" (click)="getMangaInfo(manga.mangaUrl)">
-      <img alt="Silhouette of mountains" src={{getImageUrl(manga.imageUrl)}} />
-      <ion-card-header>
-        <ion-card-title>{{manga.title}}</ion-card-title>
-        <ion-card-subtitle>{{manga.date}}</ion-card-subtitle>
-      </ion-card-header>
-    </ion-card>
-  </div> -->
+  
 
   <ngx-loading [show]="isLoading" [config]="{
     backdropBorderRadius: '5px', fullScreenBackdrop:true}"></ngx-loading>

@@ -5,6 +5,14 @@ ion-content {
     background-color: black;
 }
 
+.notFound {
+    margin-top: 33%;
+    color: chartreuse;
+    p {
+        text-align: center;
+    }
+}
+
 #cards-container {
     display: flex;
     flex-wrap: wrap;
@@ -37,4 +45,8 @@ ion-card {
 ion-card-header.ios {
     display: flex;
     flex-flow: column-reverse;
+}
+
+.webisteLogo {
+    max-width: 13em;
 }
