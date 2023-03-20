@@ -193,6 +193,9 @@ export class MangaInfoPage implements OnInit {
       case "tmomanga":
         return "TmoManga";
         break;
+      case "lectortmo":
+        return "LectorTmo";
+        break;
       default:
         return null;
         break;

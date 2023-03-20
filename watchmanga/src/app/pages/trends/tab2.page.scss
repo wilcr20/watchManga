@@ -49,4 +49,9 @@ ion-card-header.ios {
 
 .webisteLogo {
     max-width: 13em;
+    &.lectorTMO {
+        max-width: 4em;
+        padding: 5px;
+        margin-left: 0.5em;
+    }
 }

@@ -2,14 +2,14 @@
   <ion-toolbar>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <img class="webisteLogo" src={{mangaService.getMangaWebSiteSelected().imgUrl}} alt="">
+        <img class="webisteLogo" [ngClass]="{'lectorTMO': mangaService.getMangaWebSiteSelected().name === 'LectorTmo'}"  
+        src={{mangaService.getMangaWebSiteSelected().imgUrl}} alt="">
       </ion-buttons>
     </ion-toolbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
   <div *ngIf="isLoadingHomeRequest" style="text-align: center;position: absolute;top: 30%;right: 0;">
     <img src="https://media.tenor.com/FIGMhsHZSIIAAAAC/anime-excited.gif" alt="">
   </div>

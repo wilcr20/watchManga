@@ -9,7 +9,7 @@ export class MangaService {
 
   constructor(public httpClient: HttpClient) { }
 
-  getMangaWebSiteSelected(){
+  getMangaWebSiteSelected() {
     return JSON.parse(localStorage.getItem("websiteSelected") as string);
   }
 
@@ -24,6 +24,9 @@ export class MangaService {
         break;
       case "TmoManga":
         return this.httpClient.get(environment.apiUrl + 'tmomanga/home');
+        break;
+      case "LectorTmo":
+        return this.httpClient.get(environment.apiUrl + 'lectortmo/home');
         break;
       default:
         return null;
@@ -43,6 +46,9 @@ export class MangaService {
       case "TmoManga":
         return this.httpClient.get(environment.apiUrl + 'tmomanga/trends');
         break;
+      case "LectorTmo":
+        return this.httpClient.get(environment.apiUrl + 'lectortmo/trends');
+        break;
       default:
         return null;
         break;
@@ -55,13 +61,16 @@ export class MangaService {
         return this.httpClient.post(environment.apiUrl + 'leercapitulo/mangaInfo', data);
         break;
       case "tumanhwas":
-        if(!data.mangaUrl.includes("https://tumanhwas.com/manga/")){
-          data.mangaUrl = "https://tumanhwas.com/manga/"+ data.mangaUrl;
+        if (!data.mangaUrl.includes("https://tumanhwas.com/manga/")) {
+          data.mangaUrl = "https://tumanhwas.com/manga/" + data.mangaUrl;
         }
         return this.httpClient.post(environment.apiUrl + 'tumanhwas/mangaInfo', data);
         break;
       case "tmomanga":
         return this.httpClient.post(environment.apiUrl + 'tmomanga/mangaInfo', data);
+        break;
+      case "lectortmo":
+        return this.httpClient.post(environment.apiUrl + 'lectortmo/mangaInfo', data);
         break;
       default:
         return null;
@@ -77,10 +86,13 @@ export class MangaService {
         return this.httpClient.get(environment.apiUrl + 'leercapitulo/search', { params: params });
         break;
       case "TuManhwas":
-        return this.httpClient.post(environment.apiUrl + 'tumanhwas/search', {term: search});
+        return this.httpClient.post(environment.apiUrl + 'tumanhwas/search', { term: search });
         break;
       case "TmoManga":
-        return this.httpClient.post(environment.apiUrl + 'tmomanga/search', {term: search});
+        return this.httpClient.post(environment.apiUrl + 'tmomanga/search', { term: search });
+        break;
+        case "LectorTmo":
+        return this.httpClient.post(environment.apiUrl + 'lectortmo/search', { term: search });
         break;
       default:
         return null;
