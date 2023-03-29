@@ -107,25 +107,31 @@ export class MangaInfoPage implements OnInit {
   readChapter(url: string, website: string) {
     if (this.isReadingChapter) {
       let chapterUrl = "";
+      let codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
       if (website != "leercapitulo") {
         chapterUrl = url;
       } else {
         chapterUrl = "https://www.leercapitulo.com" + url;
       }
+
+      if(website == "lectortmo"){
+        codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { console.log(e) }'
+      }
+
       let target = "_blank";
       let browser = this.theInAppBrowser.create(chapterUrl, target, this.options);
 
 
       browser.on("loadstart").subscribe(() => {
         browser.executeScript({
-          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 50); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+          code: codeToExec
         });
       });
 
 
       browser.on('loadstop').subscribe(() => {
         browser.executeScript({
-          code: 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 50); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+          code: codeToExec
         });
       });
     }
