@@ -112,6 +112,8 @@ export class MangaService {
       case "TmoManga":
         return this.httpClient.post(environment.apiUrl + 'tmomanga/searchByGenre', { genre: genre });
         break;
+      case "LectorTmo":
+        return this.httpClient.post(environment.apiUrl + 'lectortmo/searchByGenre', { genre: genre });
       default:
         return null;
         break;
