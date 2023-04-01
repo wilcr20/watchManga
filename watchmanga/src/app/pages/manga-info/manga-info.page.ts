@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InAppBrowserOptions, InAppBrowser, InAppBrowserEventType } from '@awesome-cordova-plugins/in-app-browser/ngx';
+import { InAppBrowserOptions, InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Favorite } from 'src/app/interfaces/favorite.interface';
 
@@ -8,12 +8,15 @@ import { Favorite } from 'src/app/interfaces/favorite.interface';
   templateUrl: './manga-info.page.html',
   styleUrls: ['./manga-info.page.scss'],
 })
+
 export class MangaInfoPage implements OnInit {
   data: any;
   isFavorite = false;
   isLoading = false;
   isReadingChapter = true;
   currentFavorite: any;
+  currentPercentage: string = "";
+  imageUrl: string = "";
 
   options: InAppBrowserOptions = {
     location: 'yes',//Or 'no' 
@@ -33,9 +36,11 @@ export class MangaInfoPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.currentFavorite = null;
+    this.imageUrl = "";
+    this.isLoading = true;
     this.isFavorite = false;
     this.data = this.navParams.data;
-    this.isLoading = true;
     this.verifyFavoriteManga();
     this.isLoading = false;
   }
@@ -49,6 +54,8 @@ export class MangaInfoPage implements OnInit {
         if (el.url == navData.url || navData.url.includes(el.url.split("/manga/")[1])) {
           this.isFavorite = true;
           this.currentFavorite = el;
+          this.currentPercentage = this.getPercentage();
+          this.imageUrl = this.getMangaImgUrl();
         }
       });
     }
@@ -114,7 +121,7 @@ export class MangaInfoPage implements OnInit {
         chapterUrl = "https://www.leercapitulo.com" + url;
       }
 
-      if(website == "lectortmo"){
+      if (website == "lectortmo") {
         codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { console.log(e) }'
       }
 
@@ -158,6 +165,7 @@ export class MangaInfoPage implements OnInit {
         localStorage.setItem("favorites", JSON.stringify(list));
       }
     }
+    this.currentPercentage = this.getPercentage();
     this.isLoading = false;
   }
 
@@ -183,7 +191,24 @@ export class MangaInfoPage implements OnInit {
         return "0%";
       }
       let percentage = (this.currentFavorite.readList.length * 100) / this.data.data.chapterList.length;
+      if (percentage > 100) {
+        this.isLoading = true;
+        let temporalChapters = this.currentFavorite.readList;
+        this.currentFavorite.readList = temporalChapters.splice(0, this.data.data.chapterList.length);
+        this.currentFavorite.readList = this.currentFavorite.readList.filter((l: { chapter: number; }) => l.chapter <= this.data.data.chapterList.length);
+        let favoriteList: any = localStorage.getItem("favorites");
+        if (favoriteList) {
+          let list = JSON.parse(favoriteList);
+          list = list.filter((l: { url: any; }) => l.url != this.currentFavorite.url);
+          list.push(this.currentFavorite);
+          localStorage.setItem("favorites", JSON.stringify(list));
+        }
+        this.isLoading = false;
+        percentage = (this.currentFavorite.readList.length * 100) / this.data.data.chapterList.length;
+      }
+
       return percentage.toFixed(2).replace(".00", "") + "%";
+
     }
     return "0%";
   }

@@ -14,14 +14,14 @@
     <button *ngIf="!isFavorite" (click)="addToFavorite()"><ion-icon style="opacity: 0.5;" name="heart-outline"></ion-icon></button>
     <button *ngIf="isFavorite" (click)="removeToFavorite()"><ion-icon name="heart-outline" ></ion-icon></button>
 
-    <img src={{getMangaImgUrl()}} onerror="this.src='../../../assets/imgNotFound.jpg'">
+    <img src={{imageUrl}} onerror="this.src='../../../assets/imgNotFound.jpg'">
     <h3>{{data.data.title}}</h3>
     <p>Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
     <p>Sitio web: <span>{{getWebsiteName(data.data.website)}} </span> </p>
     <p *ngIf="data.data.state">Estado: <span>{{data.data.state}} </span> </p>
     <article>{{data.data.description}}</article>
     
-    <p *ngIf="isFavorite" id="percentageRead">{{getPercentage()}} de capitulos leídos en total.</p>
+    <p *ngIf="isFavorite" id="percentageRead">{{currentPercentage}} de capitulos leídos en total.</p>
     <br>
     <div class="chapterList">
       <div *ngFor="let ch of data.data.chapterList;let i = index" (click)="readChapter(ch.chapterUrl, data.data.website)">

@@ -15,7 +15,8 @@ export class Tab3Page {
   searchResult: any = [];
   isSearchDone = false;
   isSearchByCategory = false;
-  categories = [
+  categories: any[] = [];
+  categories_1 = [
     {
       name: "Acción",
       url: "accion/",
@@ -148,6 +149,145 @@ export class Tab3Page {
       url: "vida-escolar/"
     }
   ];
+
+  categories_LectorTMO = [
+    {
+      name: "Acción",
+      url: 1
+    },
+    {
+      name: "Animación",
+      url: 40
+    },
+    {
+      name: "Apocalíptico",
+      url: 24
+    },
+    {
+      name: "Artes marciales",
+      url: 33
+    },
+    {
+      name: "Aventura",
+      url: 2
+    },
+    {
+      name: "Ciencia Ficción",
+      url: 14
+    },
+    {
+      name: "Comedia",
+      url: 3
+    },
+    {
+      name: "Crimen",
+      url: 30
+    },
+    {
+      name: "Demonios",
+      url: 41
+    },
+    // Deportes
+    {
+      name: "Drama",
+      url: 4
+    },
+    {
+      name: "Ecchi",
+      url: 6
+    },
+    // Extranjero, Familia
+    {
+      name: "Fantasía",
+      url: 7
+    },
+    {
+      name: "Girls love",
+      url: 17
+    },
+    // Bender, Girls love
+    {
+      name: "Gore",
+      url: 23
+    },
+    // Guerra
+    {
+      name: "Harem",
+      url: 19
+    },
+    // Historia
+    {
+      name: "Horror",
+      url: 10
+    },
+    {
+      name: "Magia",
+      url: 8
+    },
+    {
+      name: "Mecha",
+      url: 20
+    },
+    // Militar
+    {
+      name: "Misterio",
+      url: 11
+    },
+    // Musica, Niños, Oeste
+    {
+      name: "Parodia",
+      url: 39
+    },
+    // Policiaco
+    {
+      name: "Psicológico",
+      url: 12
+    },
+    // Realidad, RV, 
+    {
+      name: "Slice of life",
+      url: 5
+    },
+    {
+      name: "Reencarnación",
+      url: 22
+    },
+    {
+      name: "Romance",
+      url: 13
+    },
+    // Samurai
+    {
+      name: "Sobrenatural",
+      url: 9
+    },
+    {
+      name: "Superpoderes",
+      url: 31
+    },
+    {
+      name: "Supervivencia",
+      url: 21
+    },
+    // Telenovela
+    {
+      name: "Thriller",
+      url: 15
+    },
+    {
+      name: "Tragedia",
+      url: 25
+    },
+    {
+      name: "Vampiros",
+      url: 32
+    },
+    {
+      name: "Vida Escolar",
+      url: 26
+    }
+  ];
+
   websites = [
     { name: "LeerCapitulo", url: "https://www.leercapitulo.com/", imgUrl: "https://www.leercapitulo.com/assets/00810181/images/logo.png" },
     { name: "TuManhwas", url: "https://tumanhwas.com/", imgUrl: "https://i.imgur.com/VlLoINI.png" },
@@ -162,10 +302,20 @@ export class Tab3Page {
   ) { }
 
   ionViewWillEnter() {
+    this.updateCategoryList();
     this.seachValue = "";
     this.isSearchByCategory = false;
     this.searchResult = [];
     this.isSearchDone = false;
+  }
+
+  updateCategoryList(){
+    let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    if(website.name == "LectorTmo"){
+      this.categories = this.categories_LectorTMO;
+    }else{
+      this.categories = this.categories_1;
+    }
   }
 
   setValue() {
@@ -281,21 +431,25 @@ export class Tab3Page {
       case "leercapitulo":
         if (this.mangaService.getMangaWebSiteSelected().name != "LeerCapitulo") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[0]));
+          this.updateCategoryList();
         }
         break;
       case "tumanhwas":
         if (this.mangaService.getMangaWebSiteSelected().name != "TuManhwas") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[1]));
+          this.updateCategoryList();
         }
         break;
       case "tmomanga":
         if (this.mangaService.getMangaWebSiteSelected().name != "TmoManga") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[2]));
+          this.updateCategoryList();
         }
         break;
       case "lectortmo":
         if (this.mangaService.getMangaWebSiteSelected().name != "LectorTmo") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[3]));
+          this.updateCategoryList();
         }
         break;
       default:
