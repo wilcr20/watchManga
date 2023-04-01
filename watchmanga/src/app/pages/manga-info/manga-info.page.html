@@ -16,7 +16,7 @@
 
     <img src={{imageUrl}} onerror="this.src='../../../assets/imgNotFound.jpg'">
     <h3>{{data.data.title}}</h3>
-    <p>Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
+    <p *ngIf="data.data.genreList.length > 0" >Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
     <p>Sitio web: <span>{{getWebsiteName(data.data.website)}} </span> </p>
     <p *ngIf="data.data.state">Estado: <span>{{data.data.state}} </span> </p>
     <article>{{data.data.description}}</article>
@@ -32,7 +32,9 @@
           <ion-icon *ngIf="isFavorite && !isChapterRead(data.data.chapterList.length-i)" class="noRead"  name="eye-off-outline"></ion-icon>
         </div>
         <!-- <ion-icon name="eye-outline"></ion-icon> -->
-        <p class="chapter">{{ch.chapter}}</p>
+        <p *ngIf="ch.chapter.trim() == ''" class="chapter">Capítulo sin nombre</p>
+        <p *ngIf="ch.chapter.trim() != ''" class="chapter">{{ch.chapter}}</p>
+
       </div>
     </div>
     <br><br>

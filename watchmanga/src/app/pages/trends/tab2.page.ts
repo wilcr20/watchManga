@@ -25,7 +25,10 @@ export class Tab2Page {
     public modalController: ModalController,
     private alertController: AlertController
   ) {
-    this.getMangaTrends()
+  }
+
+  ionViewWillEnter(){
+    this.getMangaTrends();
   }
 
   getMangaTrends() {

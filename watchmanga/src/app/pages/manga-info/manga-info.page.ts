@@ -42,6 +42,7 @@ export class MangaInfoPage implements OnInit {
     this.isFavorite = false;
     this.data = this.navParams.data;
     this.verifyFavoriteManga();
+    this.imageUrl = this.getMangaImgUrl();
     this.isLoading = false;
   }
 
@@ -55,7 +56,6 @@ export class MangaInfoPage implements OnInit {
           this.isFavorite = true;
           this.currentFavorite = el;
           this.currentPercentage = this.getPercentage();
-          this.imageUrl = this.getMangaImgUrl();
         }
       });
     }

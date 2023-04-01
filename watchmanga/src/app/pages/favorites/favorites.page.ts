@@ -24,6 +24,7 @@ export class FavoritesPage {
   ionViewWillEnter() {
     this.getFavoriteList(true);
     this.tabText = "TODOS";
+    document.getElementById("firstSegmentTab")?.click();
   }
 
   getFavoriteList(isFilterForAll: boolean) {
