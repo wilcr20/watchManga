@@ -47,9 +47,6 @@ export class Tab2Page {
   }
 
   getImageUrl(manga: any, website: string) {
-    if (website == "leercapitulo") {
-      return "https://www.leercapitulo.com" + manga.imageUrl;
-    }
     return manga.imageUrl;
   }
 

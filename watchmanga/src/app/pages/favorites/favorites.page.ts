@@ -22,9 +22,30 @@ export class FavoritesPage {
   tabText: string = "TODOS";
 
   ionViewWillEnter() {
+    this.updateLeerapituloFavorites();
+
     this.getFavoriteList(true);
     this.tabText = "TODOS";
     document.getElementById("firstSegmentTab")?.click();
+  }
+
+  updateLeerapituloFavorites() {
+    let favoriteListTemp = localStorage.getItem("favorites");
+    if (favoriteListTemp) {
+      this.favoriteList = JSON.parse(favoriteListTemp).reverse();
+      this.favoriteList.forEach((fav: { website: string; url: string; imgUrl: string; readList: any[]; }) => {
+        if (fav.website == "leercapitulo") {
+          if (!fav.url.includes("https://www.leercapitulo.com")) {
+            fav.url = "https://www.leercapitulo.com" + fav.url;
+          }
+          if (!fav.imgUrl.includes("https://www.leercapitulo.com")) {
+            fav.imgUrl = "https://www.leercapitulo.com" + fav.imgUrl;
+          }
+        }
+      });
+    }
+    localStorage.setItem("favorites", JSON.stringify(this.favoriteList.reverse()));
+
   }
 
   getFavoriteList(isFilterForAll: boolean) {
@@ -40,9 +61,6 @@ export class FavoritesPage {
   }
 
   getImageUrl(favorite: any) {
-    if(favorite.website == "leercapitulo"){
-      return "https://www.leercapitulo.com" + favorite.imgUrl;
-    }
     return favorite.imgUrl;
   }
 

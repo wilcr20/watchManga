@@ -55,9 +55,6 @@ export class Tab1Page {
   }
 
   getImageUrl(manga: any) {
-    if (manga.website == "leercapitulo") {
-      return "https://www.leercapitulo.com" + manga.imageUrl;
-    }
     return manga.imageUrl;
   }
 
