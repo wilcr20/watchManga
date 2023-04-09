@@ -45,7 +45,6 @@ ion-content {
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
-
         }
 
         ion-thumbnail {
@@ -138,5 +137,27 @@ ion-card-header.ios {
         max-width: 4em;
         padding: 5px;
         margin-left: 0.5em;
+    }
+}
+
+.divPagination {
+    margin-bottom: 1.5em;
+    margin-top: -1em;
+    text-align: center;
+    .pagination {
+        display: inline-block;
+
+        & a {
+            float: left;
+            padding: 8px 16px;
+            text-decoration: none;
+
+            &.active {
+                background-color: #4CAF50;
+                color: black;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+        }
     }
 }

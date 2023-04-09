@@ -19,6 +19,7 @@ export class SearchPage {
   isLoading = false;
   seachValue = ""
   searchResult: any = [];
+  paginationData: any = [];
   isSearchDone = false;
   isSearchByCategory = false;
   websites: any;
@@ -103,14 +104,17 @@ export class SearchPage {
   }
 
   searchByGenreSelected(url: string) {
-    this.isLoading = true;
-    this.mangaService.searchMangaGenre(url)?.subscribe((data: any) => {
-      this.isLoading = false
-      this.isSearchByCategory = true;
-      this.searchResult = data.data;
-    }, (err) => {
-      this.isLoading = false;
-    })
+    if (url) {
+      this.isLoading = true;
+      this.mangaService.searchMangaGenre(url)?.subscribe((data: any) => {
+        this.isLoading = false
+        this.isSearchByCategory = true;
+        this.searchResult = data.data;
+        this.paginationData = data.paginationList;
+      }, (err) => {
+        this.isLoading = false;
+      })
+    }
   }
 
   goToSearchPage() {
@@ -195,6 +199,17 @@ export class SearchPage {
       default:
         break;
     }
+  }
+
+  isActivePaginationItem(page: any): boolean {
+    if (Number(page.page) && !page.pageUrl) {
+      return true;
+    }
+    return false;
+  }
+
+  goToItemPagination(page: any) {
+
   }
 
 }

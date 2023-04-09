@@ -2,8 +2,8 @@
   <ion-toolbar>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <img class="webisteLogo" [ngClass]="{'lectorTMO': mangaService.getMangaWebSiteSelected().name === 'LectorTmo'}"  
-        src={{mangaService.getMangaWebSiteSelected().imgUrl}} alt="">
+        <img class="webisteLogo" [ngClass]="{'lectorTMO': mangaService.getMangaWebSiteSelected().name === 'LectorTmo'}"
+          src={{mangaService.getMangaWebSiteSelected().imgUrl}} alt="">
       </ion-buttons>
     </ion-toolbar>
   </ion-toolbar>
@@ -44,7 +44,7 @@
     </div>
 
     <div *ngIf="isSearchByCategory && searchResult.length > 0">
-      <button class="closeButton" (click)="goToSearchPage()" >X</button>
+      <button class="closeButton" (click)="goToSearchPage()">X</button>
       <div id="cards-container">
         <ion-card *ngFor="let manga of searchResult" (click)="getMangaInfo(manga.mangaUrl, manga.website)">
           <img src={{getImageUrl(manga)}} onerror="this.src='../../../assets/imgNotFound.jpg'" />
@@ -54,9 +54,16 @@
         </ion-card>
       </div>
       <br><br>
+      <div class="divPagination" *ngIf="paginationData.length > 0">
+        <div class="pagination">
+          <a (click)="searchByGenreSelected(pag.pageUrl)"  *ngFor="let pag of paginationData"
+           [ngClass]="{ 'active': isActivePaginationItem(pag) }">
+            {{pag.page}}
+          </a>
+        </div>
+
+      </div>
     </div>
-
-
   </div>
 
   <ngx-loading [show]="isLoading" [config]="{
