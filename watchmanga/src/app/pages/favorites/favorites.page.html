@@ -29,6 +29,8 @@
         </ion-thumbnail>
         <ion-label class="ion-text-wrap">
           <h2>{{favorite.title}} </h2>
+          <h6 *ngIf="!favorite.lastReadDate">Sin leer aún.</h6>
+          <h6 *ngIf="favorite.lastReadDate">{{getlastReadDate(favorite.lastReadDate)}}</h6>
           <br>
           <div class="divOptions">
             <ion-icon *ngIf="favorite.tab != 'ALL'" class="all" (click)="setMangaForAll(favorite.url, favorite.tab)"

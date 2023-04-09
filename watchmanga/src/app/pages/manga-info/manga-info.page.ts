@@ -84,7 +84,8 @@ export class MangaInfoPage implements OnInit {
           imgUrl: this.data.data.imageUrl,
           readList: [],
           tab: "ALL",
-          website: this.data.data.website
+          website: this.data.data.website,
+          lastReadDate: undefined as any
         }
         list.push(favorite);
         this.currentFavorite = favorite;
@@ -143,8 +144,12 @@ export class MangaInfoPage implements OnInit {
     if (this.currentFavorite) {
       let chapterRead = this.currentFavorite.readList.filter((l: { chapter: number; }) => l.chapter == chaptNumber);
       if (chapterRead.length == 0) {
+        // Add chapter read
         this.currentFavorite.readList.push({ chapter: chaptNumber });
+        const now = new Date();
+        this.currentFavorite.lastReadDate = now.toLocaleString();
       } else {
+        // Remove chapter read
         this.currentFavorite.readList = this.currentFavorite.readList.filter((l: { chapter: number; }) => l.chapter != chaptNumber);
       }
       let favoriteList: any = localStorage.getItem("favorites");

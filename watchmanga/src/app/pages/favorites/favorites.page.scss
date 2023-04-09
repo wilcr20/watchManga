@@ -26,14 +26,20 @@ ion-content {
         height: 155px;
 
         h2 {
-            font-size: 15px;
+            font-size: 14px;
             color: white;
             text-align: initial;
             display: -webkit-box;
-            -webkit-line-clamp: 3;
+            -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        h6{
+            color: gray;
+            font-size: 11px;
+            padding-top: 5px;
+            // padding: 7px 0 7px;
         }
 
         .divOptions {

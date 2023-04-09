@@ -155,4 +155,55 @@ export class FavoritesPage {
     }
   }
 
+  getlastReadDate(lastReadFav: any) {
+    const now = new Date();
+    let startTimestamp = this.getTimestamp(lastReadFav);
+    let stopTimestamp = this.getTimestamp(now.toLocaleString());
+    let differenceInSecs = stopTimestamp - startTimestamp;
+
+    if (differenceInSecs < 60) {
+      return "Leído por última vez hace unos segundos.";
+    } else {
+      if (differenceInSecs < 3600) {
+        let mins = Math.abs(differenceInSecs / 60).toString().split(".")[0];
+        if (mins == "1") {
+          return "Leído por última vez hace 1 minuto.";
+        } else {
+          return "Leído por última vez hace " + mins + " minutos.";
+        }
+      } else {
+        if (differenceInSecs < 86400) {
+          let hours = Math.abs(differenceInSecs / 3600).toString().split(".")[0];
+          if (hours == "1") {
+            return "Leído por última vez hace 1 hora.";
+          } else {
+            return "Leído por última vez hace " + hours + " horas.";
+          }
+        } else {
+          let days = Math.abs(differenceInSecs / 86400).toString().split(".")[0];
+          if (days == "1") {
+            return "Leído por última vez hace 1 día.";
+          } else {
+            return "Leído por última vez hace " + days + " días.";
+          }
+        }
+      }
+    }
+  }
+
+  getTimestamp(time: string) {
+    let timeFirst = time.split(', ')[0].split('/');
+    let timeY = timeFirst[2];
+    let timeM = timeFirst[1];
+    let timeD = timeFirst[0];
+    let timeSecond = time.split(', ')[1];
+    let timestamp =
+      new Date(
+        Date.parse(
+          timeY + '-' + timeM + '-' + timeD + ' ' + timeSecond + '+0000'
+        )
+      ).getTime() / 1000;
+    return timestamp;
+  }
+
 }

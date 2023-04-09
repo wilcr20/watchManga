@@ -5,4 +5,5 @@ export interface Favorite{
     readList: [];
     tab: string;
     website: string;
+    lastReadDate: string;
 }
