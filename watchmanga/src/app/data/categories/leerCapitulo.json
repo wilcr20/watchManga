@@ -1,0 +1,124 @@
+{
+    "data": [
+        {
+            "name": "Acción",
+            "url": "accion/"
+        },
+        {
+            "name": "Animación",
+            "url": "animacion/"
+        },
+        {
+            "name": "Apocalíptico",
+            "url": "apocalíptico/"
+        },
+        {
+            "name": "Artes marciales",
+            "url": "artes-marciales/"
+        },
+        {
+            "name": "Aventura",
+            "url": "aventura/"
+        },
+        {
+            "name": "Ciencia Ficción",
+            "url": "ciencia-ficcion/"
+        },
+        {
+            "name": "Comedia",
+            "url": "comedia/"
+        },
+        {
+            "name": "Crimen",
+            "url": "crimen/"
+        },
+        {
+            "name": "Demonios",
+            "url": "demonios/"
+        },
+        {
+            "name": "Drama",
+            "url": "drama/"
+        },
+        {
+            "name": "Ecchi",
+            "url": "ecchi/"
+        },
+        {
+            "name": "Fantasía",
+            "url": "fantasia/"
+        },
+        {
+            "name": "Gore",
+            "url": "gore/"
+        },
+        {
+            "name": "Harem",
+            "url": "harem/"
+        },
+        {
+            "name": "Horror",
+            "url": "horror/"
+        },
+        {
+            "name": "Magia",
+            "url": "magia/"
+        },
+        {
+            "name": "Mecha",
+            "url": "mecha/"
+        },
+        {
+            "name": "Misterio",
+            "url": "misterio/"
+        },
+        {
+            "name": "Parodia",
+            "url": "parodia/"
+        },
+        {
+            "name": "Psicológico",
+            "url": "psicologico/"
+        },
+        {
+            "name": "Slice of life",
+            "url": "recuentos-de-la-vida/"
+        },
+        {
+            "name": "Reencarnación",
+            "url": "reencarnacion/"
+        },
+        {
+            "name": "Romance",
+            "url": "romance/"
+        },
+        {
+            "name": "Sobrenatural",
+            "url": "sobrenatural/"
+        },
+        {
+            "name": "Superpoderes",
+            "url": "superpoderes/"
+        },
+        {
+            "name": "Supervivencia",
+            "url": "supervivencia/"
+        },
+        {
+            "name": "Thriller",
+            "url": "thriller/"
+        },
+        {
+            "name": "Tragedia",
+            "url": "tragedia/"
+        },
+        {
+            "name": "Vampiros",
+            "url": "vampiros/"
+        },
+        {
+            "name": "Vida Escolar",
+            "url": "vida-escolar/"
+        }
+    ]
+}

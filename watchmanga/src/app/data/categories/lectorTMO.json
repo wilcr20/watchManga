@@ -1,0 +1,128 @@
+{
+    "data": [
+        {
+            "name": "Acción",
+            "url": 1
+        },
+        {
+            "name": "Animación",
+            "url": 40
+        },
+        {
+            "name": "Apocalíptico",
+            "url": 24
+        },
+        {
+            "name": "Artes marciales",
+            "url": 33
+        },
+        {
+            "name": "Aventura",
+            "url": 2
+        },
+        {
+            "name": "Ciencia Ficción",
+            "url": 14
+        },
+        {
+            "name": "Comedia",
+            "url": 3
+        },
+        {
+            "name": "Crimen",
+            "url": 30
+        },
+        {
+            "name": "Demonios",
+            "url": 41
+        },
+        {
+            "name": "Drama",
+            "url": 4
+        },
+        {
+            "name": "Ecchi",
+            "url": 6
+        },
+        {
+            "name": "Fantasía",
+            "url": 7
+        },
+        {
+            "name": "Girls love",
+            "url": 17
+        },
+        {
+            "name": "Gore",
+            "url": 23
+        },
+        {
+            "name": "Harem",
+            "url": 19
+        },
+        {
+            "name": "Horror",
+            "url": 10
+        },
+        {
+            "name": "Magia",
+            "url": 8
+        },
+        {
+            "name": "Mecha",
+            "url": 20
+        },
+        {
+            "name": "Misterio",
+            "url": 11
+        },
+        {
+            "name": "Parodia",
+            "url": 39
+        },
+        {
+            "name": "Psicológico",
+            "url": 12
+        },
+        {
+            "name": "Slice of life",
+            "url": 5
+        },
+        {
+            "name": "Reencarnación",
+            "url": 22
+        },
+        {
+            "name": "Romance",
+            "url": 13
+        },
+        {
+            "name": "Sobrenatural",
+            "url": 9
+        },
+        {
+            "name": "Superpoderes",
+            "url": 31
+        },
+        {
+            "name": "Supervivencia",
+            "url": 21
+        },
+        {
+            "name": "Thriller",
+            "url": 15
+        },
+        {
+            "name": "Tragedia",
+            "url": 25
+        },
+        {
+            "name": "Vampiros",
+            "url": 32
+        },
+        {
+            "name": "Vida Escolar",
+            "url": 26
+        }
+    ]
+}

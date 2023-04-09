@@ -3,6 +3,11 @@ import { AlertController, ModalController } from '@ionic/angular';
 import { MangaService } from 'src/app/services/manga.service';
 import { MangaInfoPage } from '../manga-info/manga-info.page';
 import websites from '../../data/websites.json';
+import lectorTMO from '../../data/categories/lectorTMO.json';
+import leerCapitulo from '../../data/categories/leerCapitulo.json';
+import tuManhwas from '../../data/categories/tuManhwas.json';
+import tmoManga from '../../data/categories/tmoManga.json';
+
 
 @Component({
   selector: 'app-tab3',
@@ -18,278 +23,6 @@ export class Tab3Page {
   isSearchByCategory = false;
   websites: any;
   categories: any[] = [];
-  categories_1 = [
-    {
-      name: "Acción",
-      url: "accion/",
-    },
-    {
-      name: "Animación",
-      url: "animacion/"
-    },
-    {
-      name: "Apocalíptico",
-      url: "apocalíptico/"
-    },
-    {
-      name: "Artes marciales",
-      url: "artes-marciales/"
-    },
-    {
-      name: "Aventura",
-      url: "aventura/"
-    },
-    {
-      name: "Ciencia Ficción",
-      url: "ciencia-ficcion/"
-    },
-    {
-      name: "Comedia",
-      url: "comedia/"
-    },
-    {
-      name: "Crimen",
-      url: "crimen/"
-    },
-    {
-      name: "Demonios",
-      url: "demonios/"
-    },
-    // Deportes
-    {
-      name: "Drama",
-      url: "drama/"
-    },
-    {
-      name: "Ecchi",
-      url: "ecchi/"
-    },
-    // Extranjero, Familia
-    {
-      name: "Fantasía",
-      url: "fantasia/"
-    },
-    // Bender, Girls love
-    {
-      name: "Gore",
-      url: "gore/"
-    },
-    // Guerra
-    {
-      name: "Harem",
-      url: "harem/"
-    },
-    // Historia
-    {
-      name: "Horror",
-      url: "horror/"
-    },
-    {
-      name: "Magia",
-      url: "magia/"
-    },
-    {
-      name: "Mecha",
-      url: "mecha/"
-    },
-    // Militar
-    {
-      name: "Misterio",
-      url: "misterio/"
-    },
-    // Musica, Niños, Oeste
-    {
-      name: "Parodia",
-      url: "parodia/"
-    },
-    // Policiaco
-    {
-      name: "Psicológico",
-      url: "psicologico/"
-    },
-    // Realidad, RV, 
-    {
-      name: "Slice of life",
-      url: "recuentos-de-la-vida/"
-    },
-    {
-      name: "Reencarnación",
-      url: "reencarnacion/"
-    },
-    {
-      name: "Romance",
-      url: "romance/"
-    },
-    // Samurai
-    {
-      name: "Sobrenatural",
-      url: "sobrenatural/"
-    },
-    {
-      name: "Superpoderes",
-      url: "superpoderes/"
-    },
-    {
-      name: "Supervivencia",
-      url: "supervivencia/"
-    },
-    // Telenovela
-    {
-      name: "Thriller",
-      url: "thriller/"
-    },
-    {
-      name: "Tragedia",
-      url: "tragedia/"
-    },
-    {
-      name: "Vampiros",
-      url: "vampiros/"
-    },
-    {
-      name: "Vida Escolar",
-      url: "vida-escolar/"
-    }
-  ];
-
-  categories_LectorTMO = [
-    {
-      name: "Acción",
-      url: 1
-    },
-    {
-      name: "Animación",
-      url: 40
-    },
-    {
-      name: "Apocalíptico",
-      url: 24
-    },
-    {
-      name: "Artes marciales",
-      url: 33
-    },
-    {
-      name: "Aventura",
-      url: 2
-    },
-    {
-      name: "Ciencia Ficción",
-      url: 14
-    },
-    {
-      name: "Comedia",
-      url: 3
-    },
-    {
-      name: "Crimen",
-      url: 30
-    },
-    {
-      name: "Demonios",
-      url: 41
-    },
-    // Deportes
-    {
-      name: "Drama",
-      url: 4
-    },
-    {
-      name: "Ecchi",
-      url: 6
-    },
-    // Extranjero, Familia
-    {
-      name: "Fantasía",
-      url: 7
-    },
-    {
-      name: "Girls love",
-      url: 17
-    },
-    // Bender, Girls love
-    {
-      name: "Gore",
-      url: 23
-    },
-    // Guerra
-    {
-      name: "Harem",
-      url: 19
-    },
-    // Historia
-    {
-      name: "Horror",
-      url: 10
-    },
-    {
-      name: "Magia",
-      url: 8
-    },
-    {
-      name: "Mecha",
-      url: 20
-    },
-    // Militar
-    {
-      name: "Misterio",
-      url: 11
-    },
-    // Musica, Niños, Oeste
-    {
-      name: "Parodia",
-      url: 39
-    },
-    // Policiaco
-    {
-      name: "Psicológico",
-      url: 12
-    },
-    // Realidad, RV, 
-    {
-      name: "Slice of life",
-      url: 5
-    },
-    {
-      name: "Reencarnación",
-      url: 22
-    },
-    {
-      name: "Romance",
-      url: 13
-    },
-    // Samurai
-    {
-      name: "Sobrenatural",
-      url: 9
-    },
-    {
-      name: "Superpoderes",
-      url: 31
-    },
-    {
-      name: "Supervivencia",
-      url: 21
-    },
-    // Telenovela
-    {
-      name: "Thriller",
-      url: 15
-    },
-    {
-      name: "Tragedia",
-      url: 25
-    },
-    {
-      name: "Vampiros",
-      url: 32
-    },
-    {
-      name: "Vida Escolar",
-      url: 26
-    }
-  ];
-
 
   constructor(
     public mangaService: MangaService,
@@ -307,12 +40,26 @@ export class Tab3Page {
     this.isSearchDone = false;
   }
 
-  updateCategoryList(){
+  updateCategoryList() {
     let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
-    if(website.name == "LectorTmo"){
-      this.categories = this.categories_LectorTMO;
-    }else{
-      this.categories = this.categories_1;
+    this.categories = [];
+    console.log(website);
+
+    switch (website.name) {
+      case "LectorTmo":
+        this.categories = lectorTMO.data;
+        break;
+      case "LeerCapitulo":
+        this.categories = leerCapitulo.data;
+        break;
+      case "TuManhwas":
+        this.categories = tuManhwas.data;
+        break;
+      case "TmoManga":
+        this.categories = tmoManga.data;
+        break;
+      default:
+        break;
     }
   }
 
