@@ -11,10 +11,10 @@ import tmoManga from '../../data/categories/tmoManga.json';
 
 @Component({
   selector: 'app-tab3',
-  templateUrl: 'tab3.page.html',
-  styleUrls: ['tab3.page.scss']
+  templateUrl: 'search.page.html',
+  styleUrls: ['search.page.scss']
 })
-export class Tab3Page {
+export class SearchPage {
 
   isLoading = false;
   seachValue = ""
@@ -43,8 +43,6 @@ export class Tab3Page {
   updateCategoryList() {
     let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
     this.categories = [];
-    console.log(website);
-
     switch (website.name) {
       case "LectorTmo":
         this.categories = lectorTMO.data;

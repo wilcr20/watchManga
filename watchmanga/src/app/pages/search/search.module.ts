@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab3Page } from './tab3.page';
+import { SearchPage } from './search.page';
 import { NgxLoadingModule } from 'ngx-loading';
 
 import { Tab3PageRoutingModule } from './search-routing.module';
@@ -16,6 +16,6 @@ import { Tab3PageRoutingModule } from './search-routing.module';
     NgxLoadingModule.forRoot({})
 
   ],
-  declarations: [Tab3Page]
+  declarations: [SearchPage]
 })
 export class Tab3PageModule {}

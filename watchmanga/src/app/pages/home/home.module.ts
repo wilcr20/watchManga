@@ -2,7 +2,7 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Tab1Page } from './tab1.page';
+import { HomePage } from './home.page';
 
 import { Tab1PageRoutingModule } from './home-routing.module';
 import { NgxLoadingModule } from 'ngx-loading';
@@ -15,6 +15,6 @@ import { NgxLoadingModule } from 'ngx-loading';
     Tab1PageRoutingModule,
     NgxLoadingModule.forRoot({})
   ],
-  declarations: [Tab1Page]
+  declarations: [HomePage]
 })
 export class Tab1PageModule {}

@@ -8,10 +8,10 @@ import websites from '../../data/websites.json';
 
 @Component({
   selector: 'app-tab1',
-  templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss']
 })
-export class Tab1Page {
+export class HomePage {
   mangaList: Array<HomeManga> = [];
   isLoading = false;
   isLoadingHomeRequest = false;

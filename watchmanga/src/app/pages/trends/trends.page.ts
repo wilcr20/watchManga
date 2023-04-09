@@ -7,10 +7,10 @@ import websites from '../../data/websites.json';
 
 @Component({
   selector: 'app-tab2',
-  templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  templateUrl: 'trends.page.html',
+  styleUrls: ['trends.page.scss']
 })
-export class Tab2Page {
+export class TrendsPage {
   isLoading = false;
   isLoadingTrendsRequest = false;
   mangaList: Array<HomeManga> = [];
