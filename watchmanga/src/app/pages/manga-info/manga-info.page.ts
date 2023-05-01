@@ -58,6 +58,25 @@ export class MangaInfoPage implements OnInit {
           this.currentPercentage = this.getPercentage();
         }
       });
+      this.setMissingImageForFavorite(navData);
+    }
+  }
+
+  setMissingImageForFavorite(navData: { data: { imageUrl: any; }; }) {
+    if (!this.currentFavorite) {
+      return;
+    }
+    if (this.currentFavorite.imgUrl == undefined || this.currentFavorite.imgUrl == "") {
+      if (navData.data.imageUrl) {
+        this.currentFavorite.imgUrl = navData.data.imageUrl;
+        let favoriteList: any = localStorage.getItem("favorites");
+        if (favoriteList) {
+          let list = JSON.parse(favoriteList);
+          list = list.filter((l: { url: any; }) => l.url != this.currentFavorite.url);
+          list.push(this.currentFavorite);
+          localStorage.setItem("favorites", JSON.stringify(list));
+        }
+      }
     }
   }
 
@@ -81,7 +100,7 @@ export class MangaInfoPage implements OnInit {
         let favorite: Favorite = {
           url: navData.url,
           title: this.data.data.title,
-          imgUrl: this.data.data.imageUrl,
+          imgUrl: this.data.data.imageUrl || "",
           readList: [],
           tab: "ALL",
           website: this.data.data.website,
