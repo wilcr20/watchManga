@@ -147,7 +147,7 @@ export class MangaInfoPage implements OnInit {
         // Add chapter read
         this.currentFavorite.readList.push({ chapter: chaptNumber });
         const now = new Date();
-        this.currentFavorite.lastReadDate = now.toLocaleString();
+        this.currentFavorite.lastReadDate = now.toLocaleString('en-GB');
       } else {
         // Remove chapter read
         this.currentFavorite.readList = this.currentFavorite.readList.filter((l: { chapter: number; }) => l.chapter != chaptNumber);

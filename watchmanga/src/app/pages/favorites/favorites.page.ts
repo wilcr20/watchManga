@@ -158,9 +158,9 @@ export class FavoritesPage {
   getlastReadDate(lastReadFav: any) {
     const now = new Date();
     let startTimestamp = this.getTimestamp(lastReadFav);
-    let stopTimestamp = this.getTimestamp(now.toLocaleString());
+    let stopTimestamp = this.getTimestamp(now.toLocaleString('en-GB'));
     let differenceInSecs = stopTimestamp - startTimestamp;
-
+   
     if (differenceInSecs < 60) {
       return "Leído por última vez hace unos segundos.";
     } else {
