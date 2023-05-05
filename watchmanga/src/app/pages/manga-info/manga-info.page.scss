@@ -50,6 +50,8 @@ ion-buttons {
 
     article {
         color: #9ca7a3;
+        overflow-y: scroll;
+        max-height: 10em;
         margin: 1em;
         text-align: center;
     }
@@ -72,6 +74,9 @@ ion-buttons {
             margin-left: 2.3em;
             margin-top: -23px;
             margin-right: 0em;
+            &.noRead {
+                opacity: 0.3;
+            }
         }
 
         .seeChapterDiv {
@@ -79,7 +84,6 @@ ion-buttons {
             color: chartreuse;
             text-align: start;
             width: 10%;
-
             .noRead {
                 opacity: 0.3;
             }

@@ -32,8 +32,8 @@
           <ion-icon *ngIf="isFavorite && !isChapterRead(data.data.chapterList.length-i)" class="noRead"  name="eye-off-outline"></ion-icon>
         </div>
         <!-- <ion-icon name="eye-outline"></ion-icon> -->
-        <p *ngIf="ch.chapter.trim() == ''" class="chapter">Capítulo sin nombre</p>
-        <p *ngIf="ch.chapter.trim() != ''" class="chapter">{{ch.chapter}}</p>
+        <p *ngIf="ch.chapter.trim() == ''" class="chapter" [ngClass]="{ 'noRead': isFavorite && !isChapterRead(data.data.chapterList.length-i) }">Capítulo sin nombre</p>
+        <p *ngIf="ch.chapter.trim() != ''" class="chapter" [ngClass]="{ 'noRead': isFavorite && !isChapterRead(data.data.chapterList.length-i) }">{{ch.chapter}}</p>
 
       </div>
     </div>

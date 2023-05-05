@@ -86,8 +86,14 @@ export class MangaInfoPage implements OnInit {
   }
 
   getMangaImgUrl() {
+    if (!this.data.data.imageUrl && this.currentFavorite) {
+      if(this.currentFavorite.imgUrl != undefined || this.currentFavorite.imgUrl != ""){
+        return this.currentFavorite.imgUrl;
+      }
+    }
     return this.data.data.imageUrl;
   }
+
 
   addToFavorite() {
     this.isLoading = true;

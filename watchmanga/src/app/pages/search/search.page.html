@@ -10,7 +10,7 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true" >
 
   <div class="body">
     <ion-searchbar *ngIf="!isSearchByCategory" (ionChange)="setValue()" [(ngModel)]="seachValue"

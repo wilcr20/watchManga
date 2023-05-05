@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { AlertController, ModalController } from '@ionic/angular';
 import { MangaService } from 'src/app/services/manga.service';
 import { MangaInfoPage } from '../manga-info/manga-info.page';
@@ -7,6 +7,7 @@ import lectorTMO from '../../data/categories/lectorTMO.json';
 import leerCapitulo from '../../data/categories/leerCapitulo.json';
 import tuManhwas from '../../data/categories/tuManhwas.json';
 import tmoManga from '../../data/categories/tmoManga.json';
+import { IonContent } from '@ionic/angular';
 
 
 @Component({
@@ -15,6 +16,8 @@ import tmoManga from '../../data/categories/tmoManga.json';
   styleUrls: ['search.page.scss']
 })
 export class SearchPage {
+
+  @ViewChild(IonContent, { static: false }) content: IonContent;
 
   isLoading = false;
   seachValue = ""
@@ -29,7 +32,8 @@ export class SearchPage {
     public mangaService: MangaService,
     public modalController: ModalController,
     private alertController: AlertController
-  ) { }
+  ) {
+  }
 
   ionViewWillEnter() {
     this.websites = websites.data;
@@ -39,6 +43,10 @@ export class SearchPage {
     this.isSearchByCategory = false;
     this.searchResult = [];
     this.isSearchDone = false;
+  }
+
+  ScrollToTop() {
+    this.content.scrollToTop(1500);
   }
 
   updateCategoryList() {
@@ -108,6 +116,7 @@ export class SearchPage {
       this.isLoading = true;
       this.mangaService.searchMangaGenre(url)?.subscribe((data: any) => {
         this.isLoading = false
+        this.ScrollToTop();
         this.isSearchByCategory = true;
         this.searchResult = data.data;
         this.paginationData = data.paginationList;

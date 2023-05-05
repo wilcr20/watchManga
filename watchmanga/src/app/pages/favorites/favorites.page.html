@@ -32,16 +32,25 @@
           <h6 *ngIf="!favorite.lastReadDate">Sin leer aún.</h6>
           <h6 *ngIf="favorite.lastReadDate">{{getlastReadDate(favorite.lastReadDate)}}</h6>
           <br>
-          <div class="divOptions">
-            <ion-icon *ngIf="favorite.tab != 'ALL'" class="all" (click)="setMangaForAll(favorite.url, favorite.tab)"
-              [ngClass]="{ 'tabSelected': favorite.tab == 'ALL' }" name="heart-outline"></ion-icon>
-            <ion-icon *ngIf="favorite.tab != 'FINISHED'" class="finished" (click)="setMangaFinished(favorite.url, favorite.tab)"
-              [ngClass]="{ 'tabSelected': favorite.tab == 'FINISHED' }" name="star-outline"></ion-icon>
-            <ion-icon *ngIf="favorite.tab != 'PAUSED'" class="paused" (click)="setMangaPaused(favorite.url, favorite.tab)"
-              [ngClass]="{ 'tabSelected': favorite.tab == 'PAUSED' }" name="stop-circle-outline"></ion-icon>
-            <ion-icon *ngIf="favorite.tab != 'JUST_FOR_ME'" class="justforme" (click)="setMangaForMe(favorite.url, favorite.tab)"
-              [ngClass]="{ 'tabSelected': favorite.tab == 'JUST_FOR_ME' }" name="flame-outline"></ion-icon>
-          </div>
+          <ion-row class="card-footer">
+            <ion-col>
+              <div class="divOptions">
+                <ion-icon *ngIf="favorite.tab != 'ALL'" class="all" (click)="setMangaForAll(favorite.url, favorite.tab)"
+                  [ngClass]="{ 'tabSelected': favorite.tab == 'ALL' }" name="heart-outline"></ion-icon>
+                <ion-icon *ngIf="favorite.tab != 'FINISHED'" class="finished"
+                  (click)="setMangaFinished(favorite.url, favorite.tab)"
+                  [ngClass]="{ 'tabSelected': favorite.tab == 'FINISHED' }" name="star-outline"></ion-icon>
+                <ion-icon *ngIf="favorite.tab != 'PAUSED'" class="paused"
+                  (click)="setMangaPaused(favorite.url, favorite.tab)"
+                  [ngClass]="{ 'tabSelected': favorite.tab == 'PAUSED' }" name="stop-circle-outline"></ion-icon>
+                <ion-icon *ngIf="favorite.tab != 'JUST_FOR_ME'" class="justforme"
+                  (click)="setMangaForMe(favorite.url, favorite.tab)"
+                  [ngClass]="{ 'tabSelected': favorite.tab == 'JUST_FOR_ME' }" name="flame-outline"></ion-icon>
+              </div>
+            </ion-col>
+
+          </ion-row>
+
         </ion-label>
       </ion-item>
     </ion-list>
