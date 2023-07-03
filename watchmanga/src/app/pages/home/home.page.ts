@@ -21,10 +21,16 @@ export class HomePage {
     public mangaService: MangaService,
     public modalController: ModalController,
     private alertController: AlertController,
-  ) { }
+  ) {
+    this.websites = websites.data;
+    if(!this.mangaService.getMangaWebSiteSelected()){
+      localStorage.setItem("websiteSelected", JSON.stringify(this.websites[0]));     
+    }
+   }
 
   ionViewWillEnter() {
     this.websites = websites.data;
+    
     localStorage.setItem("mangasUrls", JSON.stringify(this.websites));
     this.getMangaHome();
   }
