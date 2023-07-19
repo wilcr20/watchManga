@@ -3,7 +3,7 @@
     <ion-toolbar>
       <ion-buttons slot="start">
         <ion-icon (click)="closeModal()" name="arrow-back-outline"></ion-icon>
-        <ion-title>{{data.data.title}}</ion-title>
+        <ion-title>{{data.title}}</ion-title>
       </ion-buttons>
     </ion-toolbar>
   </ion-toolbar>
@@ -15,25 +15,25 @@
     <button *ngIf="isFavorite" (click)="removeToFavorite()"><ion-icon name="heart-outline" ></ion-icon></button>
 
     <img src={{imageUrl}} onerror="this.src='../../../assets/imgNotFound.jpg'">
-    <h3>{{data.data.title}}</h3>
-    <p *ngIf="data.data.genreList.length > 0" >Géneros: <span *ngFor="let g of data.data.genreList">{{g.genre}}, </span> </p>
-    <p>Sitio web: <span>{{getWebsiteName(data.data.website)}} </span> </p>
-    <p *ngIf="data.data.state">Estado: <span>{{data.data.state}} </span> </p>
-    <article>{{data.data.description}}</article>
+    <h3>{{data.title}}</h3>
+    <p *ngIf="data.genreList.length > 0" >Géneros: <span *ngFor="let g of data.genreList">{{g.genre}}, </span> </p>
+    <p>Sitio web: <span>{{getWebsiteName(data.website)}} </span> </p>
+    <p *ngIf="data.state">Estado: <span>{{data.state}} </span> </p>
+    <article>{{data.description}}</article>
     
     <p *ngIf="isFavorite" id="percentageRead">{{currentPercentage}} de capitulos leídos en total.</p>
     <br>
     <div class="chapterList">
-      <div *ngFor="let ch of data.data.chapterList;let i = index" (click)="readChapter(ch.chapterUrl, data.data.website)">
+      <div *ngFor="let ch of data.chapterList;let i = index" (click)="readChapter(ch.chapterUrl, data.website)">
         <hr>
-        <div class="seeChapterDiv" (click)="seeChapter(data.data.chapterList.length-i)">
+        <div class="seeChapterDiv" (click)="seeChapter(data.chapterList.length-i)">
           <ion-icon *ngIf="!isFavorite" name="book-outline"></ion-icon>
-          <ion-icon *ngIf="isFavorite && isChapterRead(data.data.chapterList.length-i)"  name="eye-outline"></ion-icon> 
-          <ion-icon *ngIf="isFavorite && !isChapterRead(data.data.chapterList.length-i)" class="noRead"  name="eye-off-outline"></ion-icon>
+          <ion-icon *ngIf="isFavorite && isChapterRead(data.chapterList.length-i)"  name="eye-outline"></ion-icon> 
+          <ion-icon *ngIf="isFavorite && !isChapterRead(data.chapterList.length-i)" class="noRead"  name="eye-off-outline"></ion-icon>
         </div>
         <!-- <ion-icon name="eye-outline"></ion-icon> -->
-        <p *ngIf="ch.chapter.trim() == ''" class="chapter" [ngClass]="{ 'noRead': isFavorite && !isChapterRead(data.data.chapterList.length-i) }">Capítulo sin nombre</p>
-        <p *ngIf="ch.chapter.trim() != ''" class="chapter" [ngClass]="{ 'noRead': isFavorite && !isChapterRead(data.data.chapterList.length-i) }">{{ch.chapter}}</p>
+        <p *ngIf="ch.chapter.trim() == ''" class="chapter" [ngClass]="{ 'noRead': isFavorite && !isChapterRead(data.chapterList.length-i) }">Capítulo sin nombre</p>
+        <p *ngIf="ch.chapter.trim() != ''" class="chapter" [ngClass]="{ 'noRead': isFavorite && !isChapterRead(data.chapterList.length-i) }">{{ch.chapter}}</p>
 
       </div>
     </div>

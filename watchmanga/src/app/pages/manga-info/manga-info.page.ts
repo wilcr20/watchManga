@@ -40,7 +40,8 @@ export class MangaInfoPage implements OnInit {
     this.imageUrl = "";
     this.isLoading = true;
     this.isFavorite = false;
-    this.data = this.navParams.data;
+    this.data = JSON.parse(localStorage.getItem("mangaInfo") as string).info;
+    // this.data = this.navParams.data;
     this.verifyFavoriteManga();
     this.imageUrl = this.getMangaImgUrl();
     this.isLoading = false;
@@ -86,12 +87,12 @@ export class MangaInfoPage implements OnInit {
   }
 
   getMangaImgUrl() {
-    if (!this.data.data.imageUrl && this.currentFavorite) {
-      if(this.currentFavorite.imgUrl != undefined || this.currentFavorite.imgUrl != ""){
+    if (!this.data.imageUrl && this.currentFavorite) {
+      if (this.currentFavorite.imgUrl != undefined || this.currentFavorite.imgUrl != "") {
         return this.currentFavorite.imgUrl;
       }
     }
-    return this.data.data.imageUrl;
+    return this.data.imageUrl;
   }
 
 
@@ -105,11 +106,11 @@ export class MangaInfoPage implements OnInit {
       if (isMangaFavorite.length == 0) {
         let favorite: Favorite = {
           url: navData.url,
-          title: this.data.data.title,
-          imgUrl: this.data.data.imageUrl || "",
+          title: this.data.title,
+          imgUrl: this.data.imageUrl || "",
           readList: [],
           tab: "ALL",
-          website: this.data.data.website,
+          website: this.data.website,
           lastReadDate: undefined as any
         }
         list.push(favorite);
@@ -135,31 +136,30 @@ export class MangaInfoPage implements OnInit {
   }
 
   readChapter(url: string, website: string) {
+    let target = "_blank";
+
     if (this.isReadingChapter) {
-      let codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+
       if (website == "lectortmo") {
-        codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { console.log(e) }'
+        //codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { console.log(e) }'
+        window.open(url, target);
+      } else {
+        let codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+        let browser = this.theInAppBrowser.create(url, target, this.options);
+        browser.on("loadstart").subscribe(() => {
+          browser.executeScript({
+            code: codeToExec
+          });
+        });
+
+        browser.on('loadstop').subscribe(() => {
+          browser.executeScript({
+            code: codeToExec
+          });
+        });
       }
-
-      let target = "_blank";
-      let browser = this.theInAppBrowser.create(url, target, this.options);
-
-
-      browser.on("loadstart").subscribe(() => {
-        browser.executeScript({
-          code: codeToExec
-        });
-      });
-
-
-      browser.on('loadstop').subscribe(() => {
-        browser.executeScript({
-          code: codeToExec
-        });
-      });
     }
     this.isReadingChapter = true;
-    setInterval
 
   }
 
@@ -210,12 +210,12 @@ export class MangaInfoPage implements OnInit {
       if (this.currentFavorite.readList.length == 0) {
         return "0%";
       }
-      let percentage = (this.currentFavorite.readList.length * 100) / this.data.data.chapterList.length;
+      let percentage = (this.currentFavorite.readList.length * 100) / this.data.chapterList.length;
       if (percentage > 100) {
         this.isLoading = true;
         let temporalChapters = this.currentFavorite.readList;
-        this.currentFavorite.readList = temporalChapters.splice(0, this.data.data.chapterList.length);
-        this.currentFavorite.readList = this.currentFavorite.readList.filter((l: { chapter: number; }) => l.chapter <= this.data.data.chapterList.length);
+        this.currentFavorite.readList = temporalChapters.splice(0, this.data.chapterList.length);
+        this.currentFavorite.readList = this.currentFavorite.readList.filter((l: { chapter: number; }) => l.chapter <= this.data.chapterList.length);
         let favoriteList: any = localStorage.getItem("favorites");
         if (favoriteList) {
           let list = JSON.parse(favoriteList);
@@ -224,7 +224,7 @@ export class MangaInfoPage implements OnInit {
           localStorage.setItem("favorites", JSON.stringify(list));
         }
         this.isLoading = false;
-        percentage = (this.currentFavorite.readList.length * 100) / this.data.data.chapterList.length;
+        percentage = (this.currentFavorite.readList.length * 100) / this.data.chapterList.length;
       }
 
       return percentage.toFixed(2).replace(".00", "") + "%";

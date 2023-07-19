@@ -61,12 +61,13 @@ export class FavoritesPage {
   }
 
   async openModal(mangaInfo: any, mangaUrl: string) {
+    localStorage.setItem("mangaInfo", JSON.stringify({info: mangaInfo }));
     const modal = await this.modalController.create({
       component: MangaInfoPage,
       componentProps: {
-        data: mangaInfo,
         url: mangaUrl
-      }
+      },
+      mode: "ios"
     });
     modal.onDidDismiss().then(() => {
       this.getFavoriteList(true);
