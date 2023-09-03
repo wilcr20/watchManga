@@ -30,10 +30,24 @@ ion-toolbar {
 }
 
 ion-title {
-  width: 15em;
+  // width: 15em;
   color: chartreuse;
+  // width: initial;
+  width: calc(125vw);
+  margin-left: -2.5em;
+
+  p {
+    overflow: hidden;
+    // width: 16em;
+    text-overflow: ellipsis;
+  }
+
 }
 
-.alert-button{
+ion-card{
+  border-radius: 25px;
+}
+
+.alert-button {
   color: black !important;
 }
