@@ -59,17 +59,17 @@ export class MangaInfoPage implements OnInit {
           this.currentPercentage = this.getPercentage();
         }
       });
-      this.setMissingImageForFavorite(navData);
+      this.setMissingImageForFavorite();
     }
   }
 
-  setMissingImageForFavorite(navData: { data: { imageUrl: any; }; }) {
+  setMissingImageForFavorite() {
     if (!this.currentFavorite) {
       return;
     }
-    if (this.currentFavorite.imgUrl == undefined || this.currentFavorite.imgUrl == "") {
-      if (navData.data.imageUrl) {
-        this.currentFavorite.imgUrl = navData.data.imageUrl;
+    if (!this.currentFavorite.imgUrl || this.currentFavorite.imgUrl == "") {
+      if (this.data.imageUrl) {
+        this.currentFavorite.imgUrl = this.data.imageUrl;
         let favoriteList: any = localStorage.getItem("favorites");
         if (favoriteList) {
           let list = JSON.parse(favoriteList);

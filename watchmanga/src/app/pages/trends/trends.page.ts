@@ -102,16 +102,16 @@ export class TrendsPage {
           type: 'radio',
           value: 'leercapitulo',
         },
-        {
-          label: 'TuManhwas',
-          type: 'radio',
-          value: 'tumanhwas',
-        },
-        {
-          label: 'TmoManga',
-          type: 'radio',
-          value: 'tmomanga',
-        },
+        // {
+        //   label: 'TuManhwas',
+        //   type: 'radio',
+        //   value: 'tumanhwas',
+        // },
+        // {
+        //   label: 'TmoManga',
+        //   type: 'radio',
+        //   value: 'tmomanga',
+        // },
         {
           label: 'LectorTMO',
           type: 'radio',
