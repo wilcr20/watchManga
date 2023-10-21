@@ -33,7 +33,11 @@ export class FavoritesPage {
     let favoriteListTemp = localStorage.getItem("favorites");
     if (favoriteListTemp) {
       this.favoriteList = JSON.parse(favoriteListTemp).reverse();
+      
+      // Ignorando otros websites inactivos
+      this.favoriteList = this.favoriteList.filter( (fav: { website: string; }) => fav.website == "leercapitulo" );
       this.temp_favoriteList = JSON.parse(favoriteListTemp);
+
       if (isFilterForAll) {
         this.favoriteList = this.favoriteList.filter((manga: { tab: string; }) => manga.tab == "ALL");
         // this.tabText = "ALL";

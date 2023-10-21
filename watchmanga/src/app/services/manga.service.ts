@@ -28,6 +28,9 @@ export class MangaService {
       case "LectorTmo":
         return this.httpClient.get(environment.apiUrl + 'lectortmo/home');
         break;
+      case "LectorMangaLat":
+        return this.httpClient.get(environment.apiUrl + 'lectormangalat/home');
+        break;
       default:
         return null;
         break;
@@ -49,6 +52,9 @@ export class MangaService {
       case "LectorTmo":
         return this.httpClient.get(environment.apiUrl + 'lectortmo/trends');
         break;
+      case "LectorMangaLat":
+        return this.httpClient.get(environment.apiUrl + 'lectormangalat/trends');
+        break;
       default:
         return null;
         break;
@@ -56,6 +62,8 @@ export class MangaService {
   }
 
   getMangaInfo(data: any, website: string) {
+    console.log(website);
+    
     switch (website) {
       case "leercapitulo":
         return this.httpClient.post(environment.apiUrl + 'leercapitulo/mangaInfo', data);
@@ -71,6 +79,9 @@ export class MangaService {
         break;
       case "lectortmo":
         return this.httpClient.post(environment.apiUrl + 'lectortmo/mangaInfo', data);
+        break;
+      case "lectormangaLat":
+        return this.httpClient.post(environment.apiUrl + 'lectormangalat/mangaInfo', data);
         break;
       default:
         return null;
@@ -91,8 +102,11 @@ export class MangaService {
       case "TmoManga":
         return this.httpClient.post(environment.apiUrl + 'tmomanga/search', { term: search });
         break;
-        case "LectorTmo":
+      case "LectorTmo":
         return this.httpClient.post(environment.apiUrl + 'lectortmo/search', { term: search });
+        break;
+      case "LectorMangaLat":
+        return this.httpClient.post(environment.apiUrl + 'lectormangalat/search', { term: search });
         break;
       default:
         return null;

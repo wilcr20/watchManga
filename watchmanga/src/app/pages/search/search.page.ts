@@ -7,6 +7,7 @@ import lectorTMO from '../../data/categories/lectorTMO.json';
 import leerCapitulo from '../../data/categories/leerCapitulo.json';
 import tuManhwas from '../../data/categories/tuManhwas.json';
 import tmoManga from '../../data/categories/tmoManga.json';
+import lectorMangaLat from "../../data/categories/lectorMangaLat.json";
 import { IonContent } from '@ionic/angular';
 
 
@@ -65,6 +66,9 @@ export class SearchPage {
       case "TmoManga":
         this.categories = tmoManga.data;
         break;
+      case "LectorMangaLat":
+        this.categories = lectorMangaLat.data;
+        break;
       default:
         break;
     }
@@ -99,7 +103,7 @@ export class SearchPage {
   }
 
   async openModal(mangaInfo: any, mangaUrl: string) {
-    localStorage.setItem("mangaInfo", JSON.stringify({info: mangaInfo }));
+    localStorage.setItem("mangaInfo", JSON.stringify({ info: mangaInfo }));
     const modal = await this.modalController.create({
       component: MangaInfoPage,
       componentProps: {
@@ -158,21 +162,27 @@ export class SearchPage {
           type: 'radio',
           value: 'leercapitulo',
         },
-        // {
-        //   label: 'TuManhwas',
-        //   type: 'radio',
-        //   value: 'tumanhwas',
-        // },
-        // {
-        //   label: 'TmoManga',
-        //   type: 'radio',
-        //   value: 'tmomanga',
-        // },
+        {
+          label: 'LectorMangaLat',
+          type: 'radio',
+          value: 'lectormangaLat',
+        },
+        /* {
+           label: 'TuManhwas',
+           type: 'radio',
+           value: 'tumanhwas',
+         },
+         {
+           label: 'TmoManga',
+           type: 'radio',
+           value: 'tmomanga',
+         },
         {
           label: 'LectorTMO',
           type: 'radio',
           value: 'lectortmo',
         },
+        */
       ],
     });
 
@@ -203,6 +213,12 @@ export class SearchPage {
       case "lectortmo":
         if (this.mangaService.getMangaWebSiteSelected().name != "LectorTmo") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[3]));
+          this.updateCategoryList();
+        }
+        break;
+      case "lectormangaLat":
+        if (this.mangaService.getMangaWebSiteSelected().name != "LectorMangaLat") {
+          localStorage.setItem("websiteSelected", JSON.stringify(this.websites[4]));
           this.updateCategoryList();
         }
         break;
