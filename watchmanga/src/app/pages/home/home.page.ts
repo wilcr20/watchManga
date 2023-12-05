@@ -116,6 +116,11 @@ export class HomePage {
           type: 'radio',
           value: 'lectormangaLat',
         },
+        {
+          label: 'ManwhaLatino',
+          type: 'radio',
+          value: 'manwhaLatino',
+        },
         /* {
            label: 'TuManhwas',
            type: 'radio',
@@ -167,6 +172,12 @@ export class HomePage {
       case "lectormangaLat":
         if (this.mangaService.getMangaWebSiteSelected().name != "LectorMangaLat") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[4]));
+          this.getMangaHome();
+        }
+        break;
+      case "manwhaLatino":
+        if (this.mangaService.getMangaWebSiteSelected().name != "ManwhaLatino") {
+          localStorage.setItem("websiteSelected", JSON.stringify(this.websites[5]));
           this.getMangaHome();
         }
         break;

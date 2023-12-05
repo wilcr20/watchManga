@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,9 @@ export class MangaService {
       case "LectorMangaLat":
         return this.httpClient.get(environment.apiUrl + 'lectormangalat/home');
         break;
+      case "ManwhaLatino":
+        return this.httpClient.get(environment.apiUrl + 'manwhaLatino/home');
+        break;
       default:
         return null;
         break;
@@ -55,6 +59,9 @@ export class MangaService {
       case "LectorMangaLat":
         return this.httpClient.get(environment.apiUrl + 'lectormangalat/trends');
         break;
+      case "ManwhaLatino":
+        return this.httpClient.get(environment.apiUrl + 'manwhaLatino/trends');
+        break;
       default:
         return null;
         break;
@@ -62,8 +69,6 @@ export class MangaService {
   }
 
   getMangaInfo(data: any, website: string) {
-    console.log(website);
-    
     switch (website) {
       case "leercapitulo":
         return this.httpClient.post(environment.apiUrl + 'leercapitulo/mangaInfo', data);
@@ -82,6 +87,9 @@ export class MangaService {
         break;
       case "lectormangaLat":
         return this.httpClient.post(environment.apiUrl + 'lectormangalat/mangaInfo', data);
+        break;
+      case "manwhaLatino":
+        return this.httpClient.post(environment.apiUrl + 'manwhaLatino/mangaInfo', data);
         break;
       default:
         return null;
@@ -108,6 +116,9 @@ export class MangaService {
       case "LectorMangaLat":
         return this.httpClient.post(environment.apiUrl + 'lectormangalat/search', { term: search });
         break;
+      case "ManwhaLatino":
+        return this.httpClient.post(environment.apiUrl + 'manwhaLatino/search', { searchUrl: search });
+        break;
       default:
         return null;
         break;
@@ -128,6 +139,13 @@ export class MangaService {
         break;
       case "LectorTmo":
         return this.httpClient.post(environment.apiUrl + 'lectortmo/searchByGenre', { genre: genre });
+        break;
+      case "LectorMangaLat":
+        return of({});
+        break;
+      case "ManwhaLatino":
+        return this.httpClient.post(environment.apiUrl + 'manwhaLatino/searchByGenre', { genreUrl: genre });
+        break;
       default:
         return null;
         break;

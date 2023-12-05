@@ -29,6 +29,12 @@
             "url": "https://www.lectormanga.lat/",
             "imgUrl": "https://www.lectormanga.lat/wp-content/uploads/2017/10/lectormanga-1.png",
             "state": "active"
+        },
+        {
+            "name": "ManwhaLatino",
+            "url": "https://manhwa-latino.com/",
+            "imgUrl": "https://manhwa-latino.com/lamihoj/2022/08/0dTpnvE_1.webp",
+            "state": "active"
         }
     ]
 }

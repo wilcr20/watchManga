@@ -35,7 +35,7 @@ export class FavoritesPage {
       this.favoriteList = JSON.parse(favoriteListTemp).reverse();
       
       // Ignorando otros websites inactivos
-      this.favoriteList = this.favoriteList.filter( (fav: { website: string; }) => fav.website == "leercapitulo" );
+      this.favoriteList = this.favoriteList.filter( (fav: { website: string; }) => fav.website != "lectortmo" );
       this.temp_favoriteList = JSON.parse(favoriteListTemp);
 
       if (isFilterForAll) {

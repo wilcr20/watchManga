@@ -8,6 +8,7 @@ import leerCapitulo from '../../data/categories/leerCapitulo.json';
 import tuManhwas from '../../data/categories/tuManhwas.json';
 import tmoManga from '../../data/categories/tmoManga.json';
 import lectorMangaLat from "../../data/categories/lectorMangaLat.json";
+import manwhaLatino from "../../data/categories/manhwaLatino.json";
 import { IonContent } from '@ionic/angular';
 
 
@@ -28,6 +29,8 @@ export class SearchPage {
   isSearchByCategory = false;
   websites: any;
   categories: any[] = [];
+  websiteSelected = "";
+  searchManwhaLatinoUrl = "";
 
   constructor(
     public mangaService: MangaService,
@@ -52,6 +55,7 @@ export class SearchPage {
 
   updateCategoryList() {
     let website = JSON.parse(localStorage.getItem("websiteSelected") as string);
+    this.websiteSelected = website.name;
     this.categories = [];
     switch (website.name) {
       case "LectorTmo":
@@ -69,6 +73,9 @@ export class SearchPage {
       case "LectorMangaLat":
         this.categories = lectorMangaLat.data;
         break;
+      case "ManwhaLatino":
+        this.categories = manwhaLatino.data;
+        break;
       default:
         break;
     }
@@ -79,11 +86,22 @@ export class SearchPage {
       this.isSearchDone = false;
       this.searchResult = [];
     } else if (this.seachValue.trim() != "" && this.seachValue.length > 2) {
-      this.mangaService.searchMangaTerm(this.seachValue)?.subscribe((data: any) => {
-        this.isSearchDone = true;
-        this.searchResult = data.data;
+      if (this.websiteSelected == "ManwhaLatino") {
+        let searchUrl = "https://manhwa-latino.com/page/1/?s=" + this.seachValue + "&post_type=wp-manga&m_orderby=new-manga";
+        this.mangaService.searchMangaTerm(searchUrl)?.subscribe((data: any) => {
+          this.isSearchDone = true;
+          this.searchResult = data.data;
+          this.paginationData = data.paginationList;
+          console.log(this.paginationData.length)
+        })
+      } else {
+        this.mangaService.searchMangaTerm(this.seachValue)?.subscribe((data: any) => {
+          this.isSearchDone = true;
+          this.paginationData = data.paginationList;
+          this.searchResult = data.data;
+        })
+      }
 
-      })
     }
   }
 
@@ -114,6 +132,20 @@ export class SearchPage {
     modal.onDidDismiss().then(() => {
     });
     return await modal.present();
+  }
+
+  searchByPageSelected(url: string) {
+    this.isSearchDone = false;
+    this.isLoading = true;
+    this.searchResult = [];
+    this.mangaService.searchMangaTerm(url)?.subscribe((data: any) => {
+      this.isSearchDone = true;
+      this.searchResult = data.data;
+      this.isLoading = false;
+
+      this.paginationData = data.paginationList;
+      console.log(this.paginationData.length)
+    })
   }
 
   searchByGenreSelected(url: string) {
@@ -167,6 +199,11 @@ export class SearchPage {
           type: 'radio',
           value: 'lectormangaLat',
         },
+        {
+          label: 'ManwhaLatino',
+          type: 'radio',
+          value: 'manwhaLatino',
+        },
         /* {
            label: 'TuManhwas',
            type: 'radio',
@@ -219,6 +256,12 @@ export class SearchPage {
       case "lectormangaLat":
         if (this.mangaService.getMangaWebSiteSelected().name != "LectorMangaLat") {
           localStorage.setItem("websiteSelected", JSON.stringify(this.websites[4]));
+          this.updateCategoryList();
+        }
+        break;
+      case "manwhaLatino":
+        if (this.mangaService.getMangaWebSiteSelected().name != "ManwhaLatino") {
+          localStorage.setItem("websiteSelected", JSON.stringify(this.websites[5]));
           this.updateCategoryList();
         }
         break;

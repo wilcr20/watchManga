@@ -137,27 +137,29 @@ export class MangaInfoPage implements OnInit {
 
   readChapter(url: string, website: string) {
     let target = "_blank";
-
+    let codeToExec = '';
     if (this.isReadingChapter) {
 
-      if (website == "lectortmo") {
-        //codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { console.log(e) }'
-        window.open(url, target);
+      if (website == "manwhaLatino") {
+        codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => { document.getElementById("miPopup").style.visibility = "hidden";document.getElementById("adult_modal").style.visibility = "hidden"; document.getElementsByClassName("modal-backdrop")[0].style.visibility = "hidden"; for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none";}; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+        // window.open(url, target);
       } else {
-        let codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
-        let browser = this.theInAppBrowser.create(url, target, this.options);
-        browser.on("loadstart").subscribe(() => {
-          browser.executeScript({
-            code: codeToExec
-          });
-        });
-
-        browser.on('loadstop').subscribe(() => {
-          browser.executeScript({
-            code: codeToExec
-          });
-        });
+        codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
       }
+
+      let browser = this.theInAppBrowser.create(url, target, this.options);
+      browser.on("loadstart").subscribe(() => {
+        browser.executeScript({
+          code: codeToExec
+        });
+      });
+
+      browser.on('loadstop').subscribe(() => {
+        browser.executeScript({
+          code: codeToExec
+        });
+      });
+
     }
     this.isReadingChapter = true;
 
@@ -246,6 +248,9 @@ export class MangaInfoPage implements OnInit {
         break;
       case "lectortmo":
         return "LectorTmo";
+        break;
+      case "manwhaLatino":
+        return "ManwhaLatino";
         break;
       default:
         return null;
