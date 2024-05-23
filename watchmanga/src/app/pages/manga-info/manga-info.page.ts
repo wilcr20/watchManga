@@ -139,11 +139,15 @@ export class MangaInfoPage implements OnInit {
     let target = "_blank";
     let codeToExec = '';
     if (this.isReadingChapter) {
+      console.log(website);
 
       if (website == "manwhaLatino") {
         codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => { document.getElementById("miPopup").style.visibility = "hidden";document.getElementById("adult_modal").style.visibility = "hidden"; document.getElementsByClassName("modal-backdrop")[0].style.visibility = "hidden"; for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none";}; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
         // window.open(url, target);
-      } else {
+      } else if (website == "leercapitulo") {
+        codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => { document.getElementById("miPopup").style.visibility = "hidden";document.getElementById("adult_modal").style.visibility = "hidden"; document.getElementsByClassName("modal-backdrop")[0].style.visibility = "hidden"; for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none";}; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
+      }
+      else {
         codeToExec = 'var func = (function f() { var iframes = document.getElementsByTagName("iframe");setInterval(() => {for (let index = 0; index < iframes.length; index++) { iframes[index].style.display = "none" }; }, 20); return f; })();document.addEventListener("click", handler, true); function handler(e) { e.stopPropagation(); e.preventDefault(); }'
       }
 
